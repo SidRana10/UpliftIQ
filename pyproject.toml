@@ -51,3 +51,4 @@ select = ["E", "F", "I", "UP", "B"]
 # Markdown report template contains long prose lines.
 "src/upliftiq/evaluation/hillstrom_report.py" = ["E501"]
 "src/upliftiq/modeling/select_report.py" = ["E501"]
+"src/upliftiq/evaluation/final_report.py" = ["E501"]

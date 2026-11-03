@@ -1,0 +1,18 @@
+{
+  "frozen_config_sha256": "03fd6b85f7e25c7fa9f797a19d56409f7bb7fffef991f50ac9263a3216fca548",
+  "chosen_policy": {
+    "kind": "baseline",
+    "name": "mens_for_all"
+  },
+  "primary_outcome": "visit",
+  "primary_comparator": "womens_for_all",
+  "data_sha256": "0e5893329d8b93cefecc571777672028290ab69865718020c78c7284f291aece",
+  "split_fingerprint": "c3ae8f2b921ec92d20e29842e062b4e572a03be8fa108ea624c28eef9721d068",
+  "n_dev": 51200,
+  "n_test": 12800,
+  "seed": 42,
+  "n_boot": 2000,
+  "code_commit": "72b1ff8e61fdf886409dff543f51529f369db019",
+  "code_dirty": true,
+  "nuisance_models_fitted_on": "development rows only"
+}
