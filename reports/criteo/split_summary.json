@@ -1,0 +1,29 @@
+{
+  "rows": 13979592,
+  "seed": 42,
+  "stratified_by": "treatment (no outcome used)",
+  "split_fingerprint": "c6bcbcbf543b4f738b88e03107377f10b63848b1ba58e401f80622e6f50f3be3",
+  "sizes": {
+    "train": 8946939,
+    "validation": 2236735,
+    "test": 2795918
+  },
+  "treated_share": {
+    "train": 0.8500000950045596,
+    "validation": 0.8500001117700577,
+    "test": 0.8500002503649964
+  },
+  "source": {
+    "file": "criteo-uplift-v2.1.csv.gz",
+    "sha256": "2716e1bf0fd157a93b5bf86924d9088419dfbac2022c6cd90030220634f616dc",
+    "url": "https://huggingface.co/datasets/criteo/criteo-uplift/resolve/main/criteo-research-uplift-v2.1.csv.gz",
+    "version": "v2.1"
+  },
+  "arrays": {
+    "X_dtype": "float32",
+    "X_gb": 0.625,
+    "labels_dtype": "uint8"
+  },
+  "scaler_fitted_on": "train rows only",
+  "peak_rss_gb": 1.4
+}
