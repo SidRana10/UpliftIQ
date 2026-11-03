@@ -26,6 +26,8 @@ data/processed/
 data/cache/
 *.csv
 *.csv.gz
+# ...but keep small generated report tables
+!reports/**/*.csv
 *.parquet
 models/
 mlruns/
