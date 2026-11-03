@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Tool caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.coverage
+htmlcov/
+
+# Datasets and artifacts (never commit raw data or models)
+data/raw/*
+!data/raw/.gitkeep
+data/interim/
+data/processed/
+data/cache/
+*.csv
+*.csv.gz
+*.parquet
+models/
+mlruns/
+
+# Env / secrets
+.env
+.env.*
+
+# Frontend (future)
+node_modules/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
