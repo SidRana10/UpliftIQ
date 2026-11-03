@@ -1,0 +1,102 @@
+{
+  "chosen_policy": {
+    "kind": "baseline",
+    "name": "mens_for_all"
+  },
+  "selection": {
+    "best_by_value": "t_learner",
+    "best_baseline": "mens_for_all",
+    "eligible_models": [
+      "t_learner"
+    ],
+    "ineligible_models": [
+      "logistic",
+      "s_learner",
+      "dr_learner"
+    ]
+  },
+  "family_best_configs": {
+    "logistic": {
+      "C": 0.01
+    },
+    "s_learner": {
+      "num_leaves": 4,
+      "min_child_samples": 300
+    },
+    "t_learner": {
+      "num_leaves": 4,
+      "min_child_samples": 300
+    },
+    "dr_learner": {
+      "num_leaves": 4,
+      "min_child_samples": 300
+    }
+  },
+  "seed": 42,
+  "split": {
+    "fingerprint": "c3ae8f2b921ec92d20e29842e062b4e572a03be8fa108ea624c28eef9721d068",
+    "seed": 42,
+    "n_folds": 5,
+    "n_dev": 51200
+  },
+  "evaluation": {
+    "primary_outcome": "visit",
+    "primary_metric": "cv_aipw_policy_value",
+    "check_metric": "cv_ipw_policy_value",
+    "propensity": 0.3333333333333333,
+    "nuisance_model": "TLearner(default params), cross-fitted on the CV folds",
+    "bootstrap": {
+      "n_boot": 2000,
+      "seed": 42,
+      "unit": "customer",
+      "ci": 0.95
+    },
+    "selection_rule": "one paired SE; simplest eligible; baselines may win; models below best baseline ineligible",
+    "model_grids": {
+      "logistic": [
+        {
+          "C": 0.01
+        },
+        {
+          "C": 0.1
+        },
+        {
+          "C": 1.0
+        },
+        {
+          "C": 10.0
+        }
+      ],
+      "lightgbm": [
+        {
+          "num_leaves": 4,
+          "min_child_samples": 100
+        },
+        {
+          "num_leaves": 4,
+          "min_child_samples": 300
+        },
+        {
+          "num_leaves": 8,
+          "min_child_samples": 100
+        },
+        {
+          "num_leaves": 8,
+          "min_child_samples": 300
+        },
+        {
+          "num_leaves": 16,
+          "min_child_samples": 100
+        },
+        {
+          "num_leaves": 16,
+          "min_child_samples": 300
+        }
+      ]
+    }
+  },
+  "data_sha256": "0e5893329d8b93cefecc571777672028290ab69865718020c78c7284f291aece",
+  "code_commit": "5f8c55794acadf3f3801c11038cacc64cd1fdf70",
+  "code_dirty": true,
+  "test_set_accessed": false
+}
