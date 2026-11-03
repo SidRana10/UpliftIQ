@@ -42,12 +42,13 @@ class OutcomeModelPredictions:
     row_ids: np.ndarray
     group: np.ndarray
     trained_on: dict[int, np.ndarray]
+    n_arms: int = N_ARMS  # 3 for Hillstrom; 2 for binary-treatment (Criteo) evaluation
 
     def __post_init__(self) -> None:
         mu = np.asarray(self.mu, dtype=float)
         n = len(mu)
-        if mu.ndim != 2 or mu.shape[1] != N_ARMS:
-            raise ValueError(f"mu must have shape (n, {N_ARMS})")
+        if mu.ndim != 2 or mu.shape[1] != self.n_arms:
+            raise ValueError(f"mu must have shape (n, {self.n_arms})")
         if not np.isfinite(mu).all():
             raise ValueError("mu contains non-finite values")
         if len(self.row_ids) != n or len(self.group) != n:
@@ -62,7 +63,7 @@ class OutcomeModelPredictions:
                 )
 
     @classmethod
-    def from_holdout(cls, mu, row_ids, train_ids) -> OutcomeModelPredictions:
+    def from_holdout(cls, mu, row_ids, train_ids, n_arms: int = N_ARMS) -> OutcomeModelPredictions:
         """One model trained on ``train_ids`` and applied to the (disjoint) ``row_ids``."""
         row_ids = np.asarray(row_ids)
         return cls(
@@ -70,6 +71,7 @@ class OutcomeModelPredictions:
             row_ids,
             np.zeros(len(row_ids), dtype=int),
             {0: np.asarray(train_ids)},
+            n_arms,
         )
 
 
@@ -104,6 +106,8 @@ def arm_scores(
         return assigned / e * y[:, None]
     if not isinstance(nuisance, OutcomeModelPredictions):
         raise TypeError("nuisance must be OutcomeModelPredictions (with out-of-sample provenance)")
+    if nuisance.n_arms != N_ARMS:
+        raise ValueError(f"nuisance has {nuisance.n_arms} arms; this evaluator needs {N_ARMS}")
     if len(nuisance.mu) != len(y):
         raise ValueError("nuisance predictions must align with y and arm")
     mu = nuisance.mu
