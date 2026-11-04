@@ -1,0 +1,4 @@
+budget,customers treated (share),AIPW value (pp),random at same budget (pp),value minus random (pp),excludes 0,"IPW value (pp, cross-check)",primary
+10%,10.0%,"0.578 [0.540, 0.620]",0.075,"0.503 [0.469, 0.540]",True,0.904,
+20%,20.0%,"0.680 [0.625, 0.733]",0.149,"0.531 [0.487, 0.575]",True,0.985,yes
+30%,30.0%,"0.707 [0.650, 0.767]",0.224,"0.484 [0.443, 0.524]",True,0.999,

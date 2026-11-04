@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "frozen_config_sha256": "e28582810b3c81d0f41d6115a5f17a857dc58927edfc729fb57921df98c0a2bb",
+  "checks": {
+    "frozen config, dataset checksum, split fingerprint, hyperparameters, protocol": "verified",
+    "refit validation-score SHA-256 equals frozen hash": true,
+    "refit AIPW nuisance equals the validated nuisance (SHA-256)": true,
+    "pipeline reproduces frozen validation AIPW value@20% (500K subset)": "0.748210 pp (frozen 0.748210 pp)",
+    "test rows opened": "no (workers scored the validation split only)"
+  },
+  "rehearsal_holdout": "validation split (development only)",
+  "test_set_accessed": false
+}

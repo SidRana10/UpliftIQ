@@ -1,0 +1,6 @@
+policy,budget,AIPW value (pp),type
+treat_nobody,0%,"0.000 [0.000, 0.000]",zero baseline
+treat_all,100%,"0.745 [0.688, 0.809]",unconstrained reference
+random@10%,10%,"0.075 [0.069, 0.081]",budget-feasible
+random@20%,20%,"0.149 [0.138, 0.162]",budget-feasible
+random@30%,30%,"0.224 [0.207, 0.243]",budget-feasible

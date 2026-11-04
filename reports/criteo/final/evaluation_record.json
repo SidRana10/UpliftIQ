@@ -1,0 +1,33 @@
+{
+  "status": "completed",
+  "frozen_config_sha256": "e28582810b3c81d0f41d6115a5f17a857dc58927edfc729fb57921df98c0a2bb",
+  "selected_model": "s_learner",
+  "started_at": "2026-11-04T07:18:27+00:00",
+  "code_commit": "3130c6f20d3e14d81754d20ec7174fc581234068",
+  "code_dirty": true,
+  "one_shot": true,
+  "finished_at": "2026-11-04T07:19:35+00:00",
+  "test_rows": 2795918,
+  "test_ids_sha256": "5be2b505b89fce76b6ed08c9ed8506871381ac681303f7b8df8e30492d289919",
+  "test_uplift_sha256": "47af6bf4d7cf92a7f771012d8fc06898dac85a51e503643d54c7c1357eaa3244",
+  "dataset_sha256": "2716e1bf0fd157a93b5bf86924d9088419dfbac2022c6cd90030220634f616dc",
+  "split_fingerprint": "c6bcbcbf543b4f738b88e03107377f10b63848b1ba58e401f80622e6f50f3be3",
+  "primary_metric": "AIPW policy value at 20% contact budget",
+  "n_boot": 200,
+  "seed": 42,
+  "nuisance_fitted_on": "training rows only",
+  "models_evaluated_on_test": [
+    "s_learner"
+  ],
+  "conversion": "exploratory only; no effect on model or policy",
+  "libraries": {
+    "python": "3.12.14",
+    "numpy": "2.5.4",
+    "pandas": "3.1.0",
+    "scikit-learn": "1.9.1",
+    "lightgbm": "4.7.0",
+    "platform": "macOS-26.5.2-arm64-arm-64bit"
+  },
+  "results_sha256": "6b029af3eac4b1f9cdfd28dc5da6c7d2ccd2248c3a2a13445db3920a6eee3867",
+  "headline_value_at_20pct_pp": 0.674119471981644
+}

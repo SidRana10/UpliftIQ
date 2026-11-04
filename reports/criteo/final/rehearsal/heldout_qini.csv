@@ -1,0 +1,3 @@
+estimator,Qini (pp),Qini / treat-all effect
+AIPW (primary),"0.309 [0.288, 0.333]",0.415
+IPW (cross-check),0.461,0.451
