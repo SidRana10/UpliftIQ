@@ -222,6 +222,39 @@ def build_model(family: str, seed: int, kwargs: dict):
     return make_model(family, seed=seed, **kwargs)
 
 
+def effective_hyperparameters(model) -> dict:
+    """Every setting that shaped the fit (library defaults merged with overrides), for freezing."""
+    from upliftiq.modeling import criteo_learners as cl
+
+    out = {"seed": model.seed}
+    for key in (
+        "C",
+        "early_stopping_rounds",
+        "val_fraction",
+        "n_cross_fit",
+        "p_treat",
+        "lr",
+        "weight_decay",
+        "batch_size",
+        "max_epochs",
+        "patience",
+        "arch",
+        "device_request",
+    ):
+        if hasattr(model, key):
+            out[key] = getattr(model, key)
+    if isinstance(model, cl.DRLearner):
+        out["outcome_model"] = cl._lgbm_kwargs(
+            cl.LGBM_DEFAULTS, model.nuisance_params, model.seed, model.n_jobs
+        )
+        out["effect_model"] = cl._lgbm_kwargs(
+            cl.DR_REGRESSOR_DEFAULTS, model.params, model.seed, model.n_jobs
+        )
+    elif isinstance(model, cl._TreeModel):
+        out["lightgbm"] = cl._lgbm_kwargs(cl.LGBM_DEFAULTS, model.params, model.seed, model.n_jobs)
+    return out
+
+
 def run_model_worker(args) -> None:
     data_dir = Path(args.data_dir)
     split, spec = load_split(data_dir), json.loads(args.spec)
@@ -268,6 +301,7 @@ def run_model_worker(args) -> None:
         "code": code_state(),
         "uplift_mean": float(uplift.mean()),
         "uplift_std": float(uplift.std()),
+        "hyperparameters": effective_hyperparameters(model),
     }
     if hasattr(model, "training_summary"):
         manifest["training"] = model.training_summary()

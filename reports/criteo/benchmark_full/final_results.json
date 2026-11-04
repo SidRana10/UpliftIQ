@@ -1,0 +1,2243 @@
+{
+  "status": "validation-only full-scale benchmark; test set untouched",
+  "n_fit": 8946939,
+  "n_val": 500000,
+  "selection": {
+    "order": [
+      "logistic",
+      "s_learner",
+      "tarnet_cpu"
+    ],
+    "rows": {
+      "logistic": {
+        "value": 0.006669451344245953,
+        "ci_low": 0.00571857626673817,
+        "ci_high": 0.00763526266872938,
+        "vs_random": 0.005053885522948909,
+        "vs_random_ci_low": 0.004309372881948984,
+        "vs_random_ci_high": 0.005805161874359637,
+        "beats_random": true
+      },
+      "s_learner": {
+        "value": 0.0074820971629565745,
+        "ci_low": 0.006352894244613327,
+        "ci_high": 0.008496340466979146,
+        "vs_random": 0.0058665313416595335,
+        "vs_random_ci_low": 0.004968552400351791,
+        "vs_random_ci_high": 0.006682466972144513,
+        "beats_random": true
+      },
+      "tarnet_cpu": {
+        "value": 0.007482121262902433,
+        "ci_low": 0.006267826465461677,
+        "ci_high": 0.008613359729101752,
+        "vs_random": 0.0058665554416053875,
+        "vs_random_ci_low": 0.0049265451713026214,
+        "vs_random_ci_high": 0.006775987127136594,
+        "beats_random": true
+      }
+    },
+    "eligible": [
+      "logistic",
+      "s_learner",
+      "tarnet_cpu"
+    ],
+    "steps": [
+      {
+        "simpler": "logistic",
+        "best": "tarnet_cpu",
+        "diff": 0.0008126699186564801,
+        "ci_low": 0.00013787401912244385,
+        "ci_high": 0.0015383008098334354,
+        "se": 0.00035725829421126906,
+        "within_one_se": false
+      },
+      {
+        "simpler": "s_learner",
+        "best": "tarnet_cpu",
+        "diff": 2.409994585839126e-08,
+        "ci_low": -0.0004367499319166389,
+        "ci_high": 0.0004729120464091747,
+        "se": 0.00023206088946679977,
+        "within_one_se": true
+      }
+    ],
+    "chosen": "s_learner",
+    "best_by_value": "tarnet_cpu",
+    "best_by_qini": "s_learner",
+    "qini_supports_choice": true
+  },
+  "assumption_check": {
+    "treated_share": 0.85,
+    "ate_ipw": 0.010996862745098045,
+    "ate_aipw": 0.008077829106485223,
+    "ate_ipw_minus_aipw": 0.002919033638612823,
+    "ate_ipw_minus_aipw_se": 0.0004584331986950809,
+    "nuisance_ate": 0.007391914207480208,
+    "predicted_baseline_treated": 0.04119845855279881,
+    "predicted_baseline_control": 0.038482673339715695,
+    "predicted_baseline_gap": 0.002715785213083112,
+    "predicted_baseline_gap_se": 0.0004240584270695788
+  },
+  "meta": {
+    "n": 500000,
+    "n_boot": 200,
+    "seed": 42,
+    "p_treat": 0.85,
+    "observed_treated_share": 0.85,
+    "estimators": [
+      "AIPW",
+      "IPW"
+    ],
+    "bootstrap": "Poisson(1) customer weights from (seed, replicate); paired across policies",
+    "tie_break": "seeded hash of row id (deterministic, independent of row order)"
+  },
+  "tables": {
+    "value": [
+      {
+        "model": "logistic",
+        "AIPW value@10% (pp)": "0.562 [0.480, 0.651]",
+        "vs random@10% (pp)": "0.481 [0.403, 0.555]",
+        "IPW value@10% (pp)": "0.914",
+        "AIPW value@20% (pp)": "0.667 [0.572, 0.764]",
+        "vs random@20% (pp)": "0.505 [0.431, 0.581]",
+        "IPW value@20% (pp)": "1.003",
+        "AIPW value@30% (pp)": "0.700 [0.596, 0.812]",
+        "vs random@30% (pp)": "0.457 [0.386, 0.538]",
+        "IPW value@30% (pp)": "1.037"
+      },
+      {
+        "model": "s_learner",
+        "AIPW value@10% (pp)": "0.614 [0.539, 0.693]",
+        "vs random@10% (pp)": "0.533 [0.460, 0.605]",
+        "IPW value@10% (pp)": "0.963",
+        "AIPW value@20% (pp)": "0.748 [0.635, 0.850]",
+        "vs random@20% (pp)": "0.587 [0.497, 0.668]",
+        "IPW value@20% (pp)": "1.066",
+        "AIPW value@30% (pp)": "0.774 [0.658, 0.878]",
+        "vs random@30% (pp)": "0.532 [0.451, 0.602]",
+        "IPW value@30% (pp)": "1.088"
+      },
+      {
+        "model": "tarnet_cpu",
+        "AIPW value@10% (pp)": "0.623 [0.540, 0.704]",
+        "vs random@10% (pp)": "0.542 [0.467, 0.617]",
+        "IPW value@10% (pp)": "0.965",
+        "AIPW value@20% (pp)": "0.748 [0.627, 0.861]",
+        "vs random@20% (pp)": "0.587 [0.493, 0.678]",
+        "IPW value@20% (pp)": "1.078",
+        "AIPW value@30% (pp)": "0.756 [0.641, 0.865]",
+        "vs random@30% (pp)": "0.514 [0.431, 0.590]",
+        "IPW value@30% (pp)": "1.074"
+      }
+    ],
+    "references": [
+      {
+        "policy": "treat_nobody",
+        "budget": 0.0,
+        "AIPW value (pp)": "0.000 [0.000, 0.000]",
+        "feasibility": "reference (budget 0)"
+      },
+      {
+        "policy": "treat_all",
+        "budget": 1.0,
+        "AIPW value (pp)": "0.808 [0.677, 0.923]",
+        "feasibility": "unconstrained reference (feasible only at budget 100%)"
+      },
+      {
+        "policy": "random@10%",
+        "budget": 0.1,
+        "AIPW value (pp)": "0.081 [0.068, 0.092]",
+        "feasibility": "feasible (budget-constrained, expectation over random draws)"
+      },
+      {
+        "policy": "random@20%",
+        "budget": 0.2,
+        "AIPW value (pp)": "0.162 [0.135, 0.185]",
+        "feasibility": "feasible (budget-constrained, expectation over random draws)"
+      },
+      {
+        "policy": "random@30%",
+        "budget": 0.3,
+        "AIPW value (pp)": "0.242 [0.203, 0.277]",
+        "feasibility": "feasible (budget-constrained, expectation over random draws)"
+      }
+    ],
+    "qini": [
+      {
+        "model": "logistic",
+        "Qini AIPW (pp)": "0.279 [0.231, 0.327]",
+        "Qini IPW (pp)": "0.456",
+        "Qini / treat-all effect": 0.34568364231643944
+      },
+      {
+        "model": "s_learner",
+        "Qini AIPW (pp)": "0.335 [0.287, 0.385]",
+        "Qini IPW (pp)": "0.498",
+        "Qini / treat-all effect": 0.4149653716698356
+      },
+      {
+        "model": "tarnet_cpu",
+        "Qini AIPW (pp)": "0.331 [0.283, 0.379]",
+        "Qini IPW (pp)": "0.497",
+        "Qini / treat-all effect": 0.40943448418630274
+      }
+    ],
+    "pairwise": [
+      {
+        "reference": "logistic",
+        "model": "s_learner",
+        "metric": "value@10%",
+        "difference (pp)": "0.051 [-0.003, 0.106]",
+        "excludes 0": false
+      },
+      {
+        "reference": "logistic",
+        "model": "s_learner",
+        "metric": "value@20%",
+        "difference (pp)": "0.081 [0.033, 0.148]",
+        "excludes 0": true
+      },
+      {
+        "reference": "logistic",
+        "model": "s_learner",
+        "metric": "value@30%",
+        "difference (pp)": "0.074 [0.025, 0.127]",
+        "excludes 0": true
+      },
+      {
+        "reference": "logistic",
+        "model": "s_learner",
+        "metric": "qini",
+        "difference (pp)": "0.056 [0.012, 0.096]",
+        "excludes 0": true
+      },
+      {
+        "reference": "logistic",
+        "model": "tarnet_cpu",
+        "metric": "value@10%",
+        "difference (pp)": "0.061 [0.010, 0.121]",
+        "excludes 0": true
+      },
+      {
+        "reference": "logistic",
+        "model": "tarnet_cpu",
+        "metric": "value@20%",
+        "difference (pp)": "0.081 [0.014, 0.154]",
+        "excludes 0": true
+      },
+      {
+        "reference": "logistic",
+        "model": "tarnet_cpu",
+        "metric": "value@30%",
+        "difference (pp)": "0.057 [-0.000, 0.111]",
+        "excludes 0": false
+      },
+      {
+        "reference": "logistic",
+        "model": "tarnet_cpu",
+        "metric": "qini",
+        "difference (pp)": "0.051 [0.007, 0.100]",
+        "excludes 0": true
+      },
+      {
+        "reference": "tarnet_cpu",
+        "model": "logistic",
+        "metric": "value@10%",
+        "difference (pp)": "-0.061 [-0.121, -0.010]",
+        "excludes 0": true
+      },
+      {
+        "reference": "tarnet_cpu",
+        "model": "logistic",
+        "metric": "value@20%",
+        "difference (pp)": "-0.081 [-0.154, -0.014]",
+        "excludes 0": true
+      },
+      {
+        "reference": "tarnet_cpu",
+        "model": "logistic",
+        "metric": "value@30%",
+        "difference (pp)": "-0.057 [-0.111, 0.000]",
+        "excludes 0": false
+      },
+      {
+        "reference": "tarnet_cpu",
+        "model": "logistic",
+        "metric": "qini",
+        "difference (pp)": "-0.051 [-0.100, -0.007]",
+        "excludes 0": true
+      },
+      {
+        "reference": "tarnet_cpu",
+        "model": "s_learner",
+        "metric": "value@10%",
+        "difference (pp)": "-0.009 [-0.074, 0.051]",
+        "excludes 0": false
+      },
+      {
+        "reference": "tarnet_cpu",
+        "model": "s_learner",
+        "metric": "value@20%",
+        "difference (pp)": "-0.000 [-0.047, 0.044]",
+        "excludes 0": false
+      },
+      {
+        "reference": "tarnet_cpu",
+        "model": "s_learner",
+        "metric": "value@30%",
+        "difference (pp)": "0.018 [-0.020, 0.068]",
+        "excludes 0": false
+      },
+      {
+        "reference": "tarnet_cpu",
+        "model": "s_learner",
+        "metric": "qini",
+        "difference (pp)": "0.004 [-0.029, 0.038]",
+        "excludes 0": false
+      }
+    ],
+    "engineering": [
+      {
+        "model": "logistic",
+        "n_fit": 8946939,
+        "train_s": 9.930029166862369,
+        "predict 500k rows (s)": 0.05368133308365941,
+        "rows/s @100k": "12,459,766",
+        "p50/p95 ms @1": "0.08 / 0.10",
+        "p50/p95 ms @1k": "0.2 / 0.2",
+        "p50/p95 ms @100k": "8 / 8",
+        "RSS before fit (GB)": 0.711273193359375,
+        "RSS peak in fit (GB)": 2.545501708984375,
+        "process peak RSS (GB)": 2.545501708984375,
+        "epochs": ""
+      },
+      {
+        "model": "s_learner",
+        "n_fit": 8946939,
+        "train_s": 48.32920462498441,
+        "predict 500k rows (s)": 2.875357292126864,
+        "rows/s @100k": "210,575",
+        "p50/p95 ms @1": "0.33 / 0.36",
+        "p50/p95 ms @1k": "5.3 / 6.1",
+        "p50/p95 ms @100k": "475 / 587",
+        "RSS before fit (GB)": 1.001373291015625,
+        "RSS peak in fit (GB)": 2.1454315185546875,
+        "process peak RSS (GB)": 2.14959716796875,
+        "epochs": ""
+      },
+      {
+        "model": "tarnet_cpu",
+        "n_fit": 8946939,
+        "train_s": 149.03041350003332,
+        "predict 500k rows (s)": 0.13768325001001358,
+        "rows/s @100k": "4,454,244",
+        "p50/p95 ms @1": "0.04 / 0.04",
+        "p50/p95 ms @1k": "0.2 / 0.2",
+        "p50/p95 ms @100k": "22 / 23",
+        "RSS before fit (GB)": 1.0016021728515625,
+        "RSS peak in fit (GB)": 1.773162841796875,
+        "process peak RSS (GB)": 1.7780303955078125,
+        "epochs": 15
+      }
+    ],
+    "cost_quality": [
+      {
+        "model": "logistic",
+        "train_s": 9.930029166862369,
+        "Qini AIPW (pp)": 0.27923733875395595,
+        "Qini CI low": 0.23088330709482233,
+        "Qini CI high": 0.32706398159250893
+      },
+      {
+        "model": "s_learner",
+        "train_s": 48.32920462498441,
+        "Qini AIPW (pp)": 0.335201935745805,
+        "Qini CI low": 0.28712994899883887,
+        "Qini CI high": 0.3851679430979994
+      },
+      {
+        "model": "tarnet_cpu",
+        "train_s": 149.03041350003332,
+        "Qini AIPW (pp)": 0.3307341793558881,
+        "Qini CI low": 0.2825970828464704,
+        "Qini CI high": 0.3793293256626725
+      }
+    ]
+  },
+  "changes_vs_base": [
+    {
+      "model": "logistic",
+      "metric": "value@10%",
+      "base": [
+        0.005370596295089469,
+        0.004467026563926088,
+        0.00621754867111496
+      ],
+      "full": [
+        0.0056226820055664106,
+        0.00480230614017803,
+        0.006506028558375396
+      ],
+      "change": [
+        0.00025208571047694115,
+        -2.537004602478622e-06,
+        0.0005386337185961739
+      ]
+    },
+    {
+      "model": "logistic",
+      "metric": "value@20%",
+      "base": [
+        0.0065391498922539055,
+        0.00556279593195883,
+        0.00741971027756459
+      ],
+      "full": [
+        0.006669451344245953,
+        0.00571857626673817,
+        0.00763526266872938
+      ],
+      "change": [
+        0.0001303014519920473,
+        -0.00014048518691457267,
+        0.0003857272266484209
+      ]
+    },
+    {
+      "model": "logistic",
+      "metric": "value@30%",
+      "base": [
+        0.00685342433810722,
+        0.0057654842316596875,
+        0.007805104794276739
+      ],
+      "full": [
+        0.006996687738953774,
+        0.005956073981545823,
+        0.008121184452041148
+      ],
+      "change": [
+        0.0001432634008465541,
+        -0.00010084259625405045,
+        0.00044407357131998835
+      ]
+    },
+    {
+      "model": "logistic",
+      "metric": "qini",
+      "base": [
+        0.002661531878194928,
+        0.002146815599284187,
+        0.0031845958361454052
+      ],
+      "full": [
+        0.0027923733875395594,
+        0.002308833070948223,
+        0.0032706398159250893
+      ],
+      "change": [
+        0.00013084150934463117,
+        -3.567126631619172e-05,
+        0.0003077426163472979
+      ]
+    },
+    {
+      "model": "s_learner",
+      "metric": "value@10%",
+      "base": [
+        0.006298529944124024,
+        0.005497169380757935,
+        0.007160677035871536
+      ],
+      "full": [
+        0.006137639681161918,
+        0.005385576249183106,
+        0.0069331190380573435
+      ],
+      "change": [
+        -0.00016089026296210642,
+        -0.0006286332158020482,
+        0.00032907405042441974
+      ]
+    },
+    {
+      "model": "s_learner",
+      "metric": "value@20%",
+      "base": [
+        0.0075707202965399605,
+        0.006398491976745956,
+        0.008577443638290792
+      ],
+      "full": [
+        0.0074820971629565745,
+        0.006352894244613327,
+        0.008496340466979146
+      ],
+      "change": [
+        -8.862313358338602e-05,
+        -0.000506005328975785,
+        0.00030472531225757217
+      ]
+    },
+    {
+      "model": "s_learner",
+      "metric": "value@30%",
+      "base": [
+        0.00802709747791244,
+        0.006866556734200891,
+        0.00909905607437365
+      ],
+      "full": [
+        0.0077400680346098585,
+        0.006582935595914571,
+        0.008782736531641107
+      ],
+      "change": [
+        -0.0002870294433025807,
+        -0.000663378145942852,
+        0.00014987347006334789
+      ]
+    },
+    {
+      "model": "s_learner",
+      "metric": "qini",
+      "base": [
+        0.0035877518872013212,
+        0.003090363823428038,
+        0.004021655514162841
+      ],
+      "full": [
+        0.0033520193574580496,
+        0.0028712994899883887,
+        0.003851679430979994
+      ],
+      "change": [
+        -0.0002357325297432716,
+        -0.00047689441661689187,
+        4.0884416883143434e-05
+      ]
+    },
+    {
+      "model": "tarnet_cpu",
+      "metric": "value@10%",
+      "base": [
+        0.006220545169451466,
+        0.005459594773538499,
+        0.006853088756472775
+      ],
+      "full": [
+        0.0062321823492643615,
+        0.005396751421313997,
+        0.007039539381737819
+      ],
+      "change": [
+        1.1637179812895582e-05,
+        -0.0004938441315631059,
+        0.0005079093405561158
+      ]
+    },
+    {
+      "model": "tarnet_cpu",
+      "metric": "value@20%",
+      "base": [
+        0.007054981798405603,
+        0.006024474368252948,
+        0.00793440298198932
+      ],
+      "full": [
+        0.007482121262902433,
+        0.006267826465461677,
+        0.008613359729101752
+      ],
+      "change": [
+        0.0004271394644968299,
+        -0.0001804536369240965,
+        0.0010861296215520177
+      ]
+    },
+    {
+      "model": "tarnet_cpu",
+      "metric": "value@30%",
+      "base": [
+        0.007233412395216925,
+        0.006227969345256696,
+        0.008210969951262597
+      ],
+      "full": [
+        0.007562594302101908,
+        0.006408071925962403,
+        0.008652996077743613
+      ],
+      "change": [
+        0.00032918190688498335,
+        -0.0003269712959931968,
+        0.0008679639140343882
+      ]
+    },
+    {
+      "model": "tarnet_cpu",
+      "metric": "qini",
+      "base": [
+        0.0029399590145481446,
+        0.002490225898361276,
+        0.0034171995341116964
+      ],
+      "full": [
+        0.003307341793558881,
+        0.002825970828464704,
+        0.003793293256626725
+      ],
+      "change": [
+        0.0003673827790107364,
+        -0.00010005482032327251,
+        0.0008539674446705074
+      ]
+    }
+  ],
+  "manifests": {
+    "logistic": {
+      "model": "logistic",
+      "family": "logistic",
+      "config_key": "3fd162fc23a08666",
+      "kwargs": {},
+      "seed": 42,
+      "n_fit": 8946939,
+      "n_val": 500000,
+      "provenance": {
+        "split_fingerprint": "c6bcbcbf543b4f738b88e03107377f10b63848b1ba58e401f80622e6f50f3be3",
+        "split_seed": 42,
+        "data_sha256": "2716e1bf0fd157a93b5bf86924d9088419dfbac2022c6cd90030220634f616dc"
+      },
+      "fit_seconds": 9.930029166862369,
+      "predict_val_seconds": 0.05368133308365941,
+      "latency": [
+        {
+          "batch": 1,
+          "reps": 200,
+          "p50_ms": 0.08385442197322845,
+          "p95_ms": 0.09526326321065424,
+          "rows_per_s": 11925.429529754103
+        },
+        {
+          "batch": 1000,
+          "reps": 30,
+          "p50_ms": 0.17483369447290897,
+          "p95_ms": 0.18310367595404387,
+          "rows_per_s": 5719721.264341028
+        },
+        {
+          "batch": 100000,
+          "reps": 3,
+          "p50_ms": 8.025832939893007,
+          "p95_ms": 8.119846042245626,
+          "rows_per_s": 12459765.9518855
+        }
+      ],
+      "rss_gb_before_fit": 0.711273193359375,
+      "rss_gb_peak_during_fit": 2.545501708984375,
+      "peak_rss_gb": 2.545501708984375,
+      "omp_num_threads": "1",
+      "libraries": {
+        "python": "3.12.14",
+        "numpy": "2.5.4",
+        "pandas": "3.1.0",
+        "scikit-learn": "1.9.1",
+        "lightgbm": "4.7.0",
+        "platform": "macOS-26.5.2-arm64-arm-64bit"
+      },
+      "code": {
+        "commit": "54261d07745c21edbd069c5192c7796937b11d7b",
+        "dirty": true
+      },
+      "uplift_mean": 0.007259326986968517,
+      "uplift_std": 0.023262791335582733,
+      "hyperparameters": {
+        "seed": 42,
+        "C": 0.1
+      }
+    },
+    "s_learner": {
+      "model": "s_learner",
+      "family": "s_learner",
+      "config_key": "3ab7b90d0af041ae",
+      "kwargs": {},
+      "seed": 42,
+      "n_fit": 8946939,
+      "n_val": 500000,
+      "provenance": {
+        "split_fingerprint": "c6bcbcbf543b4f738b88e03107377f10b63848b1ba58e401f80622e6f50f3be3",
+        "split_seed": 42,
+        "data_sha256": "2716e1bf0fd157a93b5bf86924d9088419dfbac2022c6cd90030220634f616dc"
+      },
+      "fit_seconds": 48.32920462498441,
+      "predict_val_seconds": 2.875357292126864,
+      "latency": [
+        {
+          "batch": 1,
+          "reps": 200,
+          "p50_ms": 0.3264164552092552,
+          "p95_ms": 0.3647376084700226,
+          "rows_per_s": 3063.571042577899
+        },
+        {
+          "batch": 1000,
+          "reps": 30,
+          "p50_ms": 5.343749420717359,
+          "p95_ms": 6.120318756438789,
+          "rows_per_s": 187134.52321006428
+        },
+        {
+          "batch": 100000,
+          "reps": 3,
+          "p50_ms": 474.8900830745697,
+          "p95_ms": 587.3576832469553,
+          "rows_per_s": 210575.0437081616
+        }
+      ],
+      "rss_gb_before_fit": 1.001373291015625,
+      "rss_gb_peak_during_fit": 2.1454315185546875,
+      "peak_rss_gb": 2.14959716796875,
+      "omp_num_threads": "1",
+      "libraries": {
+        "python": "3.12.14",
+        "numpy": "2.5.4",
+        "pandas": "3.1.0",
+        "scikit-learn": "1.9.1",
+        "lightgbm": "4.7.0",
+        "platform": "macOS-26.5.2-arm64-arm-64bit"
+      },
+      "code": {
+        "commit": "54261d07745c21edbd069c5192c7796937b11d7b",
+        "dirty": true
+      },
+      "uplift_mean": 0.007250868249684572,
+      "uplift_std": 0.023088399320840836,
+      "hyperparameters": {
+        "seed": 42,
+        "early_stopping_rounds": 30,
+        "val_fraction": 0.15,
+        "lightgbm": {
+          "n_estimators": 400,
+          "learning_rate": 0.05,
+          "num_leaves": 31,
+          "min_child_samples": 500,
+          "subsample": 0.8,
+          "subsample_freq": 1,
+          "colsample_bytree": 0.8,
+          "random_state": 42,
+          "deterministic": true,
+          "force_row_wise": true,
+          "n_jobs": 4,
+          "verbose": -1
+        }
+      }
+    },
+    "tarnet_cpu": {
+      "model": "tarnet_cpu",
+      "family": "tarnet",
+      "config_key": "80a97f4b5ac90fc8",
+      "kwargs": {
+        "device": "cpu"
+      },
+      "seed": 42,
+      "n_fit": 8946939,
+      "n_val": 500000,
+      "provenance": {
+        "split_fingerprint": "c6bcbcbf543b4f738b88e03107377f10b63848b1ba58e401f80622e6f50f3be3",
+        "split_seed": 42,
+        "data_sha256": "2716e1bf0fd157a93b5bf86924d9088419dfbac2022c6cd90030220634f616dc"
+      },
+      "fit_seconds": 149.03041350003332,
+      "predict_val_seconds": 0.13768325001001358,
+      "latency": [
+        {
+          "batch": 1,
+          "reps": 200,
+          "p50_ms": 0.038958387449383736,
+          "p95_ms": 0.04030177369713783,
+          "rows_per_s": 25668.413542507096
+        },
+        {
+          "batch": 1000,
+          "reps": 30,
+          "p50_ms": 0.191541388630867,
+          "p95_ms": 0.19392529502511022,
+          "rows_per_s": 5220803.749769043
+        },
+        {
+          "batch": 100000,
+          "reps": 3,
+          "p50_ms": 22.450500167906284,
+          "p95_ms": 22.552949655801058,
+          "rows_per_s": 4454243.747449031
+        }
+      ],
+      "rss_gb_before_fit": 1.0016021728515625,
+      "rss_gb_peak_during_fit": 1.773162841796875,
+      "peak_rss_gb": 1.7780303955078125,
+      "omp_num_threads": "1",
+      "libraries": {
+        "python": "3.12.14",
+        "numpy": "2.5.4",
+        "pandas": "3.1.0",
+        "scikit-learn": "1.9.1",
+        "lightgbm": "4.7.0",
+        "platform": "macOS-26.5.2-arm64-arm-64bit",
+        "torch": "2.15.0"
+      },
+      "code": {
+        "commit": "54261d07745c21edbd069c5192c7796937b11d7b",
+        "dirty": true
+      },
+      "uplift_mean": 0.007115296553820372,
+      "uplift_std": 0.020072894170880318,
+      "hyperparameters": {
+        "seed": 42,
+        "val_fraction": 0.1,
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 4096,
+        "max_epochs": 30,
+        "patience": 3,
+        "arch": {
+          "hidden": 128,
+          "depth": 2,
+          "head_hidden": 64,
+          "dropout": 0.1
+        },
+        "device_request": "cpu"
+      },
+      "training": {
+        "device": "cpu",
+        "epochs_run": 15,
+        "best_epoch": 12,
+        "fit_seconds": 148.9149865838699,
+        "best_val_loss": 0.10297342235707957,
+        "last_predict_ms_per_1k_rows": 0.22238333709537983
+      }
+    }
+  },
+  "policies": {
+    "logistic": [
+      {
+        "model": "logistic",
+        "estimator": "AIPW",
+        "policy": "budget",
+        "budget_requested": 0.1,
+        "budget": 0.1,
+        "n_treated": 50000,
+        "value": 0.0056226820055664106,
+        "se": 0.0004394744705323612,
+        "ci_low": 0.00480230614017803,
+        "ci_high": 0.006506028558375396,
+        "random_value": 0.0008077829106485217,
+        "diff_vs_random": 0.004814899094917889,
+        "diff_vs_random_ci_low": 0.004026790853048286,
+        "diff_vs_random_ci_high": 0.005553466821647303,
+        "treat_all_value": 0.008077829106485216,
+        "diff_vs_treat_all": -0.002455147100918806,
+        "diff_vs_treat_all_ci_low": -0.003319451676421777,
+        "diff_vs_treat_all_ci_high": -0.001436728613546866,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "logistic",
+        "estimator": "AIPW",
+        "policy": "budget",
+        "budget_requested": 0.2,
+        "budget": 0.2,
+        "n_treated": 100000,
+        "value": 0.006669451344245953,
+        "se": 0.0005223872052617293,
+        "ci_low": 0.00571857626673817,
+        "ci_high": 0.00763526266872938,
+        "random_value": 0.0016155658212970434,
+        "diff_vs_random": 0.005053885522948909,
+        "diff_vs_random_ci_low": 0.004309372881948984,
+        "diff_vs_random_ci_high": 0.005805161874359637,
+        "treat_all_value": 0.008077829106485216,
+        "diff_vs_treat_all": -0.0014083777622392636,
+        "diff_vs_treat_all_ci_low": -0.0020461047629490177,
+        "diff_vs_treat_all_ci_high": -0.0007274359920333003,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "logistic",
+        "estimator": "AIPW",
+        "policy": "budget",
+        "budget_requested": 0.3,
+        "budget": 0.3,
+        "n_treated": 150000,
+        "value": 0.006996687738953774,
+        "se": 0.0005510533403288603,
+        "ci_low": 0.005956073981545823,
+        "ci_high": 0.008121184452041148,
+        "random_value": 0.002423348731945565,
+        "diff_vs_random": 0.004573339007008209,
+        "diff_vs_random_ci_low": 0.0038580642710459466,
+        "diff_vs_random_ci_high": 0.0053766442758624985,
+        "treat_all_value": 0.008077829106485216,
+        "diff_vs_treat_all": -0.0010811413675314427,
+        "diff_vs_treat_all_ci_low": -0.0016568303485410964,
+        "diff_vs_treat_all_ci_high": -0.00040182721683838937,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "logistic",
+        "estimator": "AIPW",
+        "policy": "uplift_gt_0",
+        "budget_requested": NaN,
+        "budget": 0.979268,
+        "n_treated": 489634,
+        "value": 0.007359417682551706,
+        "se": 0.0005940409338164444,
+        "ci_low": 0.006256843735386676,
+        "ci_high": 0.008393814212959382,
+        "random_value": 0.007910359553449564,
+        "diff_vs_random": -0.0005509418708978583,
+        "diff_vs_random_ci_low": -0.0010316473698774445,
+        "diff_vs_random_ci_high": 2.0566596806555953e-05,
+        "treat_all_value": 0.008077829106485216,
+        "diff_vs_treat_all": -0.0007184114239335102,
+        "diff_vs_treat_all_ci_low": -0.0011953968709127556,
+        "diff_vs_treat_all_ci_high": -0.00013414254239055756,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "s_learner",
+        "estimator": "AIPW",
+        "policy": "budget",
+        "budget_requested": 0.1,
+        "budget": 0.1,
+        "n_treated": 50000,
+        "value": 0.006137639681161918,
+        "se": 0.0004649666536025028,
+        "ci_low": 0.005385576249183106,
+        "ci_high": 0.0069331190380573435,
+        "random_value": 0.0008077829106485206,
+        "diff_vs_random": 0.005329856770513397,
+        "diff_vs_random_ci_low": 0.004600712108230762,
+        "diff_vs_random_ci_high": 0.006046329955863257,
+        "treat_all_value": 0.008077829106485206,
+        "diff_vs_treat_all": -0.001940189425323288,
+        "diff_vs_treat_all_ci_low": -0.0027666554789187296,
+        "diff_vs_treat_all_ci_high": -0.0010362206499289963,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "s_learner",
+        "estimator": "AIPW",
+        "policy": "budget",
+        "budget_requested": 0.2,
+        "budget": 0.2,
+        "n_treated": 100000,
+        "value": 0.0074820971629565745,
+        "se": 0.0005682512631854863,
+        "ci_low": 0.006352894244613327,
+        "ci_high": 0.008496340466979146,
+        "random_value": 0.0016155658212970412,
+        "diff_vs_random": 0.0058665313416595335,
+        "diff_vs_random_ci_low": 0.004968552400351791,
+        "diff_vs_random_ci_high": 0.006682466972144513,
+        "treat_all_value": 0.008077829106485206,
+        "diff_vs_treat_all": -0.0005957319435286315,
+        "diff_vs_treat_all_ci_low": -0.0011994303255016064,
+        "diff_vs_treat_all_ci_high": 9.290375393417947e-06,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "s_learner",
+        "estimator": "AIPW",
+        "policy": "budget",
+        "budget_requested": 0.3,
+        "budget": 0.3,
+        "n_treated": 150000,
+        "value": 0.0077400680346098585,
+        "se": 0.0005991551763775767,
+        "ci_low": 0.006582935595914571,
+        "ci_high": 0.008782736531641107,
+        "random_value": 0.0024233487319455615,
+        "diff_vs_random": 0.005316719302664297,
+        "diff_vs_random_ci_low": 0.0045057909984662645,
+        "diff_vs_random_ci_high": 0.006017673719584543,
+        "treat_all_value": 0.008077829106485206,
+        "diff_vs_treat_all": -0.0003377610718753475,
+        "diff_vs_treat_all_ci_low": -0.0008028808223995865,
+        "diff_vs_treat_all_ci_high": 9.73763752736368e-05,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "s_learner",
+        "estimator": "AIPW",
+        "policy": "uplift_gt_0",
+        "budget_requested": NaN,
+        "budget": 0.98597,
+        "n_treated": 492985,
+        "value": 0.008043315725769863,
+        "se": 0.0006267850493285983,
+        "ci_low": 0.006823162689454798,
+        "ci_high": 0.009286063318333336,
+        "random_value": 0.00796449716412122,
+        "diff_vs_random": 7.881856164864386e-05,
+        "diff_vs_random_ci_low": -0.0001662504242855346,
+        "diff_vs_random_ci_high": 0.00033635232557338536,
+        "treat_all_value": 0.008077829106485206,
+        "diff_vs_treat_all": -3.451338071534284e-05,
+        "diff_vs_treat_all_ci_low": -0.0002939984205694835,
+        "diff_vs_treat_all_ci_high": 0.000226785145558877,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "tarnet_cpu",
+        "estimator": "AIPW",
+        "policy": "budget",
+        "budget_requested": 0.1,
+        "budget": 0.1,
+        "n_treated": 50000,
+        "value": 0.0062321823492643615,
+        "se": 0.0004584632429444188,
+        "ci_low": 0.005396751421313997,
+        "ci_high": 0.007039539381737819,
+        "random_value": 0.0008077829106485226,
+        "diff_vs_random": 0.005424399438615839,
+        "diff_vs_random_ci_low": 0.004671637920777534,
+        "diff_vs_random_ci_high": 0.006171117987489646,
+        "treat_all_value": 0.008077829106485225,
+        "diff_vs_treat_all": -0.0018456467572208635,
+        "diff_vs_treat_all_ci_low": -0.0027353387531695804,
+        "diff_vs_treat_all_ci_high": -0.000924894044533733,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "tarnet_cpu",
+        "estimator": "AIPW",
+        "policy": "budget",
+        "budget_requested": 0.2,
+        "budget": 0.2,
+        "n_treated": 100000,
+        "value": 0.007482121262902433,
+        "se": 0.0005646812573087276,
+        "ci_low": 0.006267826465461677,
+        "ci_high": 0.008613359729101752,
+        "random_value": 0.0016155658212970451,
+        "diff_vs_random": 0.0058665554416053875,
+        "diff_vs_random_ci_low": 0.0049265451713026214,
+        "diff_vs_random_ci_high": 0.006775987127136594,
+        "treat_all_value": 0.008077829106485225,
+        "diff_vs_treat_all": -0.0005957078435827922,
+        "diff_vs_treat_all_ci_low": -0.001141165479087084,
+        "diff_vs_treat_all_ci_high": -8.751756236032694e-06,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "tarnet_cpu",
+        "estimator": "AIPW",
+        "policy": "budget",
+        "budget_requested": 0.3,
+        "budget": 0.3,
+        "n_treated": 150000,
+        "value": 0.007562594302101908,
+        "se": 0.0006007242720807675,
+        "ci_low": 0.006408071925962403,
+        "ci_high": 0.008652996077743613,
+        "random_value": 0.0024233487319455676,
+        "diff_vs_random": 0.005139245570156341,
+        "diff_vs_random_ci_low": 0.004308340250159133,
+        "diff_vs_random_ci_high": 0.005903483820147731,
+        "treat_all_value": 0.008077829106485225,
+        "diff_vs_treat_all": -0.0005152348043833167,
+        "diff_vs_treat_all_ci_low": -0.0010457521969575213,
+        "diff_vs_treat_all_ci_high": -7.277460124232247e-05,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "tarnet_cpu",
+        "estimator": "AIPW",
+        "policy": "uplift_gt_0",
+        "budget_requested": NaN,
+        "budget": 0.993878,
+        "n_treated": 496939,
+        "value": 0.007958877113464435,
+        "se": 0.0006274061636067586,
+        "ci_low": 0.00666032668746852,
+        "ci_high": 0.009097724414748355,
+        "random_value": 0.008028376636695323,
+        "diff_vs_random": -6.949952323088808e-05,
+        "diff_vs_random_ci_low": -0.0003002477282670023,
+        "diff_vs_random_ci_high": 0.0002072593204034199,
+        "treat_all_value": 0.008077829106485225,
+        "diff_vs_treat_all": -0.00011895199302078968,
+        "diff_vs_treat_all_ci_low": -0.00034829101053803657,
+        "diff_vs_treat_all_ci_high": 0.0001590067468406544,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "logistic",
+        "estimator": "IPW",
+        "policy": "budget",
+        "budget_requested": 0.1,
+        "budget": 0.1,
+        "n_treated": 50000,
+        "value": 0.009140392156862751,
+        "se": 0.0005497537675038746,
+        "ci_low": 0.00798769838746117,
+        "ci_high": 0.010185328257604504,
+        "random_value": 0.0010996862745098052,
+        "diff_vs_random": 0.008040705882352946,
+        "diff_vs_random_ci_low": 0.007003497555924489,
+        "diff_vs_random_ci_high": 0.009042397703791899,
+        "treat_all_value": 0.010996862745098052,
+        "diff_vs_treat_all": -0.0018564705882353014,
+        "diff_vs_treat_all_ci_low": -0.0028376635479948524,
+        "diff_vs_treat_all_ci_high": -0.0008181104020170304,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "logistic",
+        "estimator": "IPW",
+        "policy": "budget",
+        "budget_requested": 0.2,
+        "budget": 0.2,
+        "n_treated": 100000,
+        "value": 0.010028235294117654,
+        "se": 0.000636799163653507,
+        "ci_low": 0.008754625658330434,
+        "ci_high": 0.011163043682648643,
+        "random_value": 0.0021993725490196104,
+        "diff_vs_random": 0.007828862745098043,
+        "diff_vs_random_ci_low": 0.00679827546934647,
+        "diff_vs_random_ci_high": 0.008674930664173373,
+        "treat_all_value": 0.010996862745098052,
+        "diff_vs_treat_all": -0.0009686274509803985,
+        "diff_vs_treat_all_ci_low": -0.001788008481666691,
+        "diff_vs_treat_all_ci_high": -0.00013025744463024326,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "logistic",
+        "estimator": "IPW",
+        "policy": "budget",
+        "budget_requested": 0.3,
+        "budget": 0.3,
+        "n_treated": 150000,
+        "value": 0.01037019607843138,
+        "se": 0.0006650396734414492,
+        "ci_low": 0.009001385842056956,
+        "ci_high": 0.011446536017780616,
+        "random_value": 0.0032990588235294158,
+        "diff_vs_random": 0.007071137254901964,
+        "diff_vs_random_ci_low": 0.006150107140737791,
+        "diff_vs_random_ci_high": 0.007944193391102921,
+        "treat_all_value": 0.010996862745098052,
+        "diff_vs_treat_all": -0.0006266666666666729,
+        "diff_vs_treat_all_ci_low": -0.0013250345728527296,
+        "diff_vs_treat_all_ci_high": 0.00010043275646379121,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "logistic",
+        "estimator": "IPW",
+        "policy": "uplift_gt_0",
+        "budget_requested": NaN,
+        "budget": 0.979268,
+        "n_treated": 489634,
+        "value": 0.010528627450980398,
+        "se": 0.0007079591331797578,
+        "ci_low": 0.00901448377193426,
+        "ci_high": 0.011791710971644498,
+        "random_value": 0.01076887578666668,
+        "diff_vs_random": -0.0002402483356862828,
+        "diff_vs_random_ci_low": -0.0008817947528930897,
+        "diff_vs_random_ci_high": 0.0005236183298294374,
+        "treat_all_value": 0.010996862745098052,
+        "diff_vs_treat_all": -0.0004682352941176547,
+        "diff_vs_treat_all_ci_low": -0.0011033072511316925,
+        "diff_vs_treat_all_ci_high": 0.00031255998621957916,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "s_learner",
+        "estimator": "IPW",
+        "policy": "budget",
+        "budget_requested": 0.1,
+        "budget": 0.1,
+        "n_treated": 50000,
+        "value": 0.009625098039215747,
+        "se": 0.0005924844892095801,
+        "ci_low": 0.008517850382964345,
+        "ci_high": 0.010625336450837264,
+        "random_value": 0.0010996862745098128,
+        "diff_vs_random": 0.008525411764705934,
+        "diff_vs_random_ci_low": 0.0075640145190748855,
+        "diff_vs_random_ci_high": 0.00938702282370823,
+        "treat_all_value": 0.010996862745098127,
+        "diff_vs_treat_all": -0.0013717647058823796,
+        "diff_vs_treat_all_ci_low": -0.0023702179677083882,
+        "diff_vs_treat_all_ci_high": -0.00029977773835798883,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "s_learner",
+        "estimator": "IPW",
+        "policy": "budget",
+        "budget_requested": 0.2,
+        "budget": 0.2,
+        "n_treated": 100000,
+        "value": 0.01065960784313732,
+        "se": 0.00071156112925487,
+        "ci_low": 0.00918797232756723,
+        "ci_high": 0.011810923288353151,
+        "random_value": 0.0021993725490196256,
+        "diff_vs_random": 0.008460235294117695,
+        "diff_vs_random_ci_low": 0.007360488463907567,
+        "diff_vs_random_ci_high": 0.009399647993196533,
+        "treat_all_value": 0.010996862745098127,
+        "diff_vs_treat_all": -0.00033725490196080676,
+        "diff_vs_treat_all_ci_low": -0.0008823699936066268,
+        "diff_vs_treat_all_ci_high": 0.00038798795916290395,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "s_learner",
+        "estimator": "IPW",
+        "policy": "budget",
+        "budget_requested": 0.3,
+        "budget": 0.3,
+        "n_treated": 150000,
+        "value": 0.010882352941176537,
+        "se": 0.0007415651047389936,
+        "ci_low": 0.009321117719894648,
+        "ci_high": 0.012238501411105605,
+        "random_value": 0.003299058823529438,
+        "diff_vs_random": 0.0075832941176470995,
+        "diff_vs_random_ci_low": 0.006553849062261814,
+        "diff_vs_random_ci_high": 0.008522273056897817,
+        "treat_all_value": 0.010996862745098127,
+        "diff_vs_treat_all": -0.0001145098039215895,
+        "diff_vs_treat_all_ci_low": -0.0005748295944529539,
+        "diff_vs_treat_all_ci_high": 0.00039078509665349694,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "s_learner",
+        "estimator": "IPW",
+        "policy": "uplift_gt_0",
+        "budget_requested": NaN,
+        "budget": 0.98597,
+        "n_treated": 492985,
+        "value": 0.0111019607843138,
+        "se": 0.0007653576614784471,
+        "ci_low": 0.009533506295313654,
+        "ci_high": 0.012482381111659894,
+        "random_value": 0.0108425767607844,
+        "diff_vs_random": 0.0002593840235294003,
+        "diff_vs_random_ci_low": -7.957156968655698e-05,
+        "diff_vs_random_ci_high": 0.0006397145652984254,
+        "treat_all_value": 0.010996862745098127,
+        "diff_vs_treat_all": 0.00010509803921567376,
+        "diff_vs_treat_all_ci_low": -0.00023961847788375113,
+        "diff_vs_treat_all_ci_high": 0.0004843983487069375,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "tarnet_cpu",
+        "estimator": "IPW",
+        "policy": "budget",
+        "budget_requested": 0.1,
+        "budget": 0.1,
+        "n_treated": 50000,
+        "value": 0.009654901960784392,
+        "se": 0.0005934244698800771,
+        "ci_low": 0.00846025549226853,
+        "ci_high": 0.010772267628294953,
+        "random_value": 0.0010996862745098121,
+        "diff_vs_random": 0.00855521568627458,
+        "diff_vs_random_ci_low": 0.007458606424491246,
+        "diff_vs_random_ci_high": 0.009615942034639726,
+        "treat_all_value": 0.010996862745098122,
+        "diff_vs_treat_all": -0.00134196078431373,
+        "diff_vs_treat_all_ci_low": -0.0022763741431193907,
+        "diff_vs_treat_all_ci_high": -0.0002959726027440064,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "tarnet_cpu",
+        "estimator": "IPW",
+        "policy": "budget",
+        "budget_requested": 0.2,
+        "budget": 0.2,
+        "n_treated": 100000,
+        "value": 0.01077960784313733,
+        "se": 0.0007091062933993141,
+        "ci_low": 0.009303090542005262,
+        "ci_high": 0.012247651756202295,
+        "random_value": 0.0021993725490196243,
+        "diff_vs_random": 0.008580235294117706,
+        "diff_vs_random_ci_low": 0.007413361750325659,
+        "diff_vs_random_ci_high": 0.00970123509078437,
+        "treat_all_value": 0.010996862745098122,
+        "diff_vs_treat_all": -0.00021725490196079084,
+        "diff_vs_treat_all_ci_low": -0.0008901705633392008,
+        "diff_vs_treat_all_ci_high": 0.0004874173962988377,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "tarnet_cpu",
+        "estimator": "IPW",
+        "policy": "budget",
+        "budget_requested": 0.3,
+        "budget": 0.3,
+        "n_treated": 150000,
+        "value": 0.010744313725490276,
+        "se": 0.000744025430067703,
+        "ci_low": 0.009222379656933647,
+        "ci_high": 0.012159860844957664,
+        "random_value": 0.0032990588235294366,
+        "diff_vs_random": 0.0074452549019608395,
+        "diff_vs_random_ci_low": 0.006427647119668391,
+        "diff_vs_random_ci_high": 0.008413517901622721,
+        "treat_all_value": 0.010996862745098122,
+        "diff_vs_treat_all": -0.0002525490196078461,
+        "diff_vs_treat_all_ci_low": -0.0007739274503261365,
+        "diff_vs_treat_all_ci_high": 0.0002214864047949689,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "tarnet_cpu",
+        "estimator": "IPW",
+        "policy": "uplift_gt_0",
+        "budget_requested": NaN,
+        "budget": 0.993878,
+        "n_treated": 496939,
+        "value": 0.011054901960784388,
+        "se": 0.0007681509448811084,
+        "ci_low": 0.009397559192363287,
+        "ci_high": 0.01245699844857205,
+        "random_value": 0.010929539951372632,
+        "diff_vs_random": 0.0001253620094117565,
+        "diff_vs_random_ci_low": -0.00016114908697659086,
+        "diff_vs_random_ci_high": 0.0004867912998502345,
+        "treat_all_value": 0.010996862745098122,
+        "diff_vs_treat_all": 5.803921568626677e-05,
+        "diff_vs_treat_all_ci_low": -0.00022377772322871044,
+        "diff_vs_treat_all_ci_high": 0.0004244997940762381,
+        "feasibility": "feasible (budget-constrained)"
+      }
+    ],
+    "tarnet_cpu": [
+      {
+        "model": "tarnet_cpu",
+        "estimator": "AIPW",
+        "policy": "budget",
+        "budget_requested": 0.1,
+        "budget": 0.1,
+        "n_treated": 50000,
+        "value": 0.0062321823492643615,
+        "se": 0.0004584632429444188,
+        "ci_low": 0.005396751421313997,
+        "ci_high": 0.007039539381737819,
+        "random_value": 0.0008077829106485226,
+        "diff_vs_random": 0.005424399438615839,
+        "diff_vs_random_ci_low": 0.004671637920777534,
+        "diff_vs_random_ci_high": 0.006171117987489646,
+        "treat_all_value": 0.008077829106485225,
+        "diff_vs_treat_all": -0.0018456467572208635,
+        "diff_vs_treat_all_ci_low": -0.0027353387531695804,
+        "diff_vs_treat_all_ci_high": -0.000924894044533733,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "tarnet_cpu",
+        "estimator": "AIPW",
+        "policy": "budget",
+        "budget_requested": 0.2,
+        "budget": 0.2,
+        "n_treated": 100000,
+        "value": 0.007482121262902433,
+        "se": 0.0005646812573087276,
+        "ci_low": 0.006267826465461677,
+        "ci_high": 0.008613359729101752,
+        "random_value": 0.0016155658212970451,
+        "diff_vs_random": 0.0058665554416053875,
+        "diff_vs_random_ci_low": 0.0049265451713026214,
+        "diff_vs_random_ci_high": 0.006775987127136594,
+        "treat_all_value": 0.008077829106485225,
+        "diff_vs_treat_all": -0.0005957078435827922,
+        "diff_vs_treat_all_ci_low": -0.001141165479087084,
+        "diff_vs_treat_all_ci_high": -8.751756236032694e-06,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "tarnet_cpu",
+        "estimator": "AIPW",
+        "policy": "budget",
+        "budget_requested": 0.3,
+        "budget": 0.3,
+        "n_treated": 150000,
+        "value": 0.007562594302101908,
+        "se": 0.0006007242720807675,
+        "ci_low": 0.006408071925962403,
+        "ci_high": 0.008652996077743613,
+        "random_value": 0.0024233487319455676,
+        "diff_vs_random": 0.005139245570156341,
+        "diff_vs_random_ci_low": 0.004308340250159133,
+        "diff_vs_random_ci_high": 0.005903483820147731,
+        "treat_all_value": 0.008077829106485225,
+        "diff_vs_treat_all": -0.0005152348043833167,
+        "diff_vs_treat_all_ci_low": -0.0010457521969575213,
+        "diff_vs_treat_all_ci_high": -7.277460124232247e-05,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "tarnet_cpu",
+        "estimator": "AIPW",
+        "policy": "uplift_gt_0",
+        "budget_requested": NaN,
+        "budget": 0.993878,
+        "n_treated": 496939,
+        "value": 0.007958877113464435,
+        "se": 0.0006274061636067586,
+        "ci_low": 0.00666032668746852,
+        "ci_high": 0.009097724414748355,
+        "random_value": 0.008028376636695323,
+        "diff_vs_random": -6.949952323088808e-05,
+        "diff_vs_random_ci_low": -0.0003002477282670023,
+        "diff_vs_random_ci_high": 0.0002072593204034199,
+        "treat_all_value": 0.008077829106485225,
+        "diff_vs_treat_all": -0.00011895199302078968,
+        "diff_vs_treat_all_ci_low": -0.00034829101053803657,
+        "diff_vs_treat_all_ci_high": 0.0001590067468406544,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "logistic",
+        "estimator": "AIPW",
+        "policy": "budget",
+        "budget_requested": 0.1,
+        "budget": 0.1,
+        "n_treated": 50000,
+        "value": 0.0056226820055664106,
+        "se": 0.0004394744705323612,
+        "ci_low": 0.00480230614017803,
+        "ci_high": 0.006506028558375396,
+        "random_value": 0.0008077829106485217,
+        "diff_vs_random": 0.004814899094917889,
+        "diff_vs_random_ci_low": 0.004026790853048286,
+        "diff_vs_random_ci_high": 0.005553466821647303,
+        "treat_all_value": 0.008077829106485216,
+        "diff_vs_treat_all": -0.002455147100918806,
+        "diff_vs_treat_all_ci_low": -0.003319451676421777,
+        "diff_vs_treat_all_ci_high": -0.001436728613546866,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "logistic",
+        "estimator": "AIPW",
+        "policy": "budget",
+        "budget_requested": 0.2,
+        "budget": 0.2,
+        "n_treated": 100000,
+        "value": 0.006669451344245953,
+        "se": 0.0005223872052617293,
+        "ci_low": 0.00571857626673817,
+        "ci_high": 0.00763526266872938,
+        "random_value": 0.0016155658212970434,
+        "diff_vs_random": 0.005053885522948909,
+        "diff_vs_random_ci_low": 0.004309372881948984,
+        "diff_vs_random_ci_high": 0.005805161874359637,
+        "treat_all_value": 0.008077829106485216,
+        "diff_vs_treat_all": -0.0014083777622392636,
+        "diff_vs_treat_all_ci_low": -0.0020461047629490177,
+        "diff_vs_treat_all_ci_high": -0.0007274359920333003,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "logistic",
+        "estimator": "AIPW",
+        "policy": "budget",
+        "budget_requested": 0.3,
+        "budget": 0.3,
+        "n_treated": 150000,
+        "value": 0.006996687738953774,
+        "se": 0.0005510533403288603,
+        "ci_low": 0.005956073981545823,
+        "ci_high": 0.008121184452041148,
+        "random_value": 0.002423348731945565,
+        "diff_vs_random": 0.004573339007008209,
+        "diff_vs_random_ci_low": 0.0038580642710459466,
+        "diff_vs_random_ci_high": 0.0053766442758624985,
+        "treat_all_value": 0.008077829106485216,
+        "diff_vs_treat_all": -0.0010811413675314427,
+        "diff_vs_treat_all_ci_low": -0.0016568303485410964,
+        "diff_vs_treat_all_ci_high": -0.00040182721683838937,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "logistic",
+        "estimator": "AIPW",
+        "policy": "uplift_gt_0",
+        "budget_requested": NaN,
+        "budget": 0.979268,
+        "n_treated": 489634,
+        "value": 0.007359417682551706,
+        "se": 0.0005940409338164444,
+        "ci_low": 0.006256843735386676,
+        "ci_high": 0.008393814212959382,
+        "random_value": 0.007910359553449564,
+        "diff_vs_random": -0.0005509418708978583,
+        "diff_vs_random_ci_low": -0.0010316473698774445,
+        "diff_vs_random_ci_high": 2.0566596806555953e-05,
+        "treat_all_value": 0.008077829106485216,
+        "diff_vs_treat_all": -0.0007184114239335102,
+        "diff_vs_treat_all_ci_low": -0.0011953968709127556,
+        "diff_vs_treat_all_ci_high": -0.00013414254239055756,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "s_learner",
+        "estimator": "AIPW",
+        "policy": "budget",
+        "budget_requested": 0.1,
+        "budget": 0.1,
+        "n_treated": 50000,
+        "value": 0.006137639681161918,
+        "se": 0.0004649666536025028,
+        "ci_low": 0.005385576249183106,
+        "ci_high": 0.0069331190380573435,
+        "random_value": 0.0008077829106485206,
+        "diff_vs_random": 0.005329856770513397,
+        "diff_vs_random_ci_low": 0.004600712108230762,
+        "diff_vs_random_ci_high": 0.006046329955863257,
+        "treat_all_value": 0.008077829106485206,
+        "diff_vs_treat_all": -0.001940189425323288,
+        "diff_vs_treat_all_ci_low": -0.0027666554789187296,
+        "diff_vs_treat_all_ci_high": -0.0010362206499289963,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "s_learner",
+        "estimator": "AIPW",
+        "policy": "budget",
+        "budget_requested": 0.2,
+        "budget": 0.2,
+        "n_treated": 100000,
+        "value": 0.0074820971629565745,
+        "se": 0.0005682512631854863,
+        "ci_low": 0.006352894244613327,
+        "ci_high": 0.008496340466979146,
+        "random_value": 0.0016155658212970412,
+        "diff_vs_random": 0.0058665313416595335,
+        "diff_vs_random_ci_low": 0.004968552400351791,
+        "diff_vs_random_ci_high": 0.006682466972144513,
+        "treat_all_value": 0.008077829106485206,
+        "diff_vs_treat_all": -0.0005957319435286315,
+        "diff_vs_treat_all_ci_low": -0.0011994303255016064,
+        "diff_vs_treat_all_ci_high": 9.290375393417947e-06,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "s_learner",
+        "estimator": "AIPW",
+        "policy": "budget",
+        "budget_requested": 0.3,
+        "budget": 0.3,
+        "n_treated": 150000,
+        "value": 0.0077400680346098585,
+        "se": 0.0005991551763775767,
+        "ci_low": 0.006582935595914571,
+        "ci_high": 0.008782736531641107,
+        "random_value": 0.0024233487319455615,
+        "diff_vs_random": 0.005316719302664297,
+        "diff_vs_random_ci_low": 0.0045057909984662645,
+        "diff_vs_random_ci_high": 0.006017673719584543,
+        "treat_all_value": 0.008077829106485206,
+        "diff_vs_treat_all": -0.0003377610718753475,
+        "diff_vs_treat_all_ci_low": -0.0008028808223995865,
+        "diff_vs_treat_all_ci_high": 9.73763752736368e-05,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "s_learner",
+        "estimator": "AIPW",
+        "policy": "uplift_gt_0",
+        "budget_requested": NaN,
+        "budget": 0.98597,
+        "n_treated": 492985,
+        "value": 0.008043315725769863,
+        "se": 0.0006267850493285983,
+        "ci_low": 0.006823162689454798,
+        "ci_high": 0.009286063318333336,
+        "random_value": 0.00796449716412122,
+        "diff_vs_random": 7.881856164864386e-05,
+        "diff_vs_random_ci_low": -0.0001662504242855346,
+        "diff_vs_random_ci_high": 0.00033635232557338536,
+        "treat_all_value": 0.008077829106485206,
+        "diff_vs_treat_all": -3.451338071534284e-05,
+        "diff_vs_treat_all_ci_low": -0.0002939984205694835,
+        "diff_vs_treat_all_ci_high": 0.000226785145558877,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "tarnet_cpu",
+        "estimator": "IPW",
+        "policy": "budget",
+        "budget_requested": 0.1,
+        "budget": 0.1,
+        "n_treated": 50000,
+        "value": 0.009654901960784392,
+        "se": 0.0005934244698800771,
+        "ci_low": 0.00846025549226853,
+        "ci_high": 0.010772267628294953,
+        "random_value": 0.0010996862745098121,
+        "diff_vs_random": 0.00855521568627458,
+        "diff_vs_random_ci_low": 0.007458606424491246,
+        "diff_vs_random_ci_high": 0.009615942034639726,
+        "treat_all_value": 0.010996862745098122,
+        "diff_vs_treat_all": -0.00134196078431373,
+        "diff_vs_treat_all_ci_low": -0.0022763741431193907,
+        "diff_vs_treat_all_ci_high": -0.0002959726027440064,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "tarnet_cpu",
+        "estimator": "IPW",
+        "policy": "budget",
+        "budget_requested": 0.2,
+        "budget": 0.2,
+        "n_treated": 100000,
+        "value": 0.01077960784313733,
+        "se": 0.0007091062933993141,
+        "ci_low": 0.009303090542005262,
+        "ci_high": 0.012247651756202295,
+        "random_value": 0.0021993725490196243,
+        "diff_vs_random": 0.008580235294117706,
+        "diff_vs_random_ci_low": 0.007413361750325659,
+        "diff_vs_random_ci_high": 0.00970123509078437,
+        "treat_all_value": 0.010996862745098122,
+        "diff_vs_treat_all": -0.00021725490196079084,
+        "diff_vs_treat_all_ci_low": -0.0008901705633392008,
+        "diff_vs_treat_all_ci_high": 0.0004874173962988377,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "tarnet_cpu",
+        "estimator": "IPW",
+        "policy": "budget",
+        "budget_requested": 0.3,
+        "budget": 0.3,
+        "n_treated": 150000,
+        "value": 0.010744313725490276,
+        "se": 0.000744025430067703,
+        "ci_low": 0.009222379656933647,
+        "ci_high": 0.012159860844957664,
+        "random_value": 0.0032990588235294366,
+        "diff_vs_random": 0.0074452549019608395,
+        "diff_vs_random_ci_low": 0.006427647119668391,
+        "diff_vs_random_ci_high": 0.008413517901622721,
+        "treat_all_value": 0.010996862745098122,
+        "diff_vs_treat_all": -0.0002525490196078461,
+        "diff_vs_treat_all_ci_low": -0.0007739274503261365,
+        "diff_vs_treat_all_ci_high": 0.0002214864047949689,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "tarnet_cpu",
+        "estimator": "IPW",
+        "policy": "uplift_gt_0",
+        "budget_requested": NaN,
+        "budget": 0.993878,
+        "n_treated": 496939,
+        "value": 0.011054901960784388,
+        "se": 0.0007681509448811084,
+        "ci_low": 0.009397559192363287,
+        "ci_high": 0.01245699844857205,
+        "random_value": 0.010929539951372632,
+        "diff_vs_random": 0.0001253620094117565,
+        "diff_vs_random_ci_low": -0.00016114908697659086,
+        "diff_vs_random_ci_high": 0.0004867912998502345,
+        "treat_all_value": 0.010996862745098122,
+        "diff_vs_treat_all": 5.803921568626677e-05,
+        "diff_vs_treat_all_ci_low": -0.00022377772322871044,
+        "diff_vs_treat_all_ci_high": 0.0004244997940762381,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "logistic",
+        "estimator": "IPW",
+        "policy": "budget",
+        "budget_requested": 0.1,
+        "budget": 0.1,
+        "n_treated": 50000,
+        "value": 0.009140392156862751,
+        "se": 0.0005497537675038746,
+        "ci_low": 0.00798769838746117,
+        "ci_high": 0.010185328257604504,
+        "random_value": 0.0010996862745098052,
+        "diff_vs_random": 0.008040705882352946,
+        "diff_vs_random_ci_low": 0.007003497555924489,
+        "diff_vs_random_ci_high": 0.009042397703791899,
+        "treat_all_value": 0.010996862745098052,
+        "diff_vs_treat_all": -0.0018564705882353014,
+        "diff_vs_treat_all_ci_low": -0.0028376635479948524,
+        "diff_vs_treat_all_ci_high": -0.0008181104020170304,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "logistic",
+        "estimator": "IPW",
+        "policy": "budget",
+        "budget_requested": 0.2,
+        "budget": 0.2,
+        "n_treated": 100000,
+        "value": 0.010028235294117654,
+        "se": 0.000636799163653507,
+        "ci_low": 0.008754625658330434,
+        "ci_high": 0.011163043682648643,
+        "random_value": 0.0021993725490196104,
+        "diff_vs_random": 0.007828862745098043,
+        "diff_vs_random_ci_low": 0.00679827546934647,
+        "diff_vs_random_ci_high": 0.008674930664173373,
+        "treat_all_value": 0.010996862745098052,
+        "diff_vs_treat_all": -0.0009686274509803985,
+        "diff_vs_treat_all_ci_low": -0.001788008481666691,
+        "diff_vs_treat_all_ci_high": -0.00013025744463024326,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "logistic",
+        "estimator": "IPW",
+        "policy": "budget",
+        "budget_requested": 0.3,
+        "budget": 0.3,
+        "n_treated": 150000,
+        "value": 0.01037019607843138,
+        "se": 0.0006650396734414492,
+        "ci_low": 0.009001385842056956,
+        "ci_high": 0.011446536017780616,
+        "random_value": 0.0032990588235294158,
+        "diff_vs_random": 0.007071137254901964,
+        "diff_vs_random_ci_low": 0.006150107140737791,
+        "diff_vs_random_ci_high": 0.007944193391102921,
+        "treat_all_value": 0.010996862745098052,
+        "diff_vs_treat_all": -0.0006266666666666729,
+        "diff_vs_treat_all_ci_low": -0.0013250345728527296,
+        "diff_vs_treat_all_ci_high": 0.00010043275646379121,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "logistic",
+        "estimator": "IPW",
+        "policy": "uplift_gt_0",
+        "budget_requested": NaN,
+        "budget": 0.979268,
+        "n_treated": 489634,
+        "value": 0.010528627450980398,
+        "se": 0.0007079591331797578,
+        "ci_low": 0.00901448377193426,
+        "ci_high": 0.011791710971644498,
+        "random_value": 0.01076887578666668,
+        "diff_vs_random": -0.0002402483356862828,
+        "diff_vs_random_ci_low": -0.0008817947528930897,
+        "diff_vs_random_ci_high": 0.0005236183298294374,
+        "treat_all_value": 0.010996862745098052,
+        "diff_vs_treat_all": -0.0004682352941176547,
+        "diff_vs_treat_all_ci_low": -0.0011033072511316925,
+        "diff_vs_treat_all_ci_high": 0.00031255998621957916,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "s_learner",
+        "estimator": "IPW",
+        "policy": "budget",
+        "budget_requested": 0.1,
+        "budget": 0.1,
+        "n_treated": 50000,
+        "value": 0.009625098039215747,
+        "se": 0.0005924844892095801,
+        "ci_low": 0.008517850382964345,
+        "ci_high": 0.010625336450837264,
+        "random_value": 0.0010996862745098128,
+        "diff_vs_random": 0.008525411764705934,
+        "diff_vs_random_ci_low": 0.0075640145190748855,
+        "diff_vs_random_ci_high": 0.00938702282370823,
+        "treat_all_value": 0.010996862745098127,
+        "diff_vs_treat_all": -0.0013717647058823796,
+        "diff_vs_treat_all_ci_low": -0.0023702179677083882,
+        "diff_vs_treat_all_ci_high": -0.00029977773835798883,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "s_learner",
+        "estimator": "IPW",
+        "policy": "budget",
+        "budget_requested": 0.2,
+        "budget": 0.2,
+        "n_treated": 100000,
+        "value": 0.01065960784313732,
+        "se": 0.00071156112925487,
+        "ci_low": 0.00918797232756723,
+        "ci_high": 0.011810923288353151,
+        "random_value": 0.0021993725490196256,
+        "diff_vs_random": 0.008460235294117695,
+        "diff_vs_random_ci_low": 0.007360488463907567,
+        "diff_vs_random_ci_high": 0.009399647993196533,
+        "treat_all_value": 0.010996862745098127,
+        "diff_vs_treat_all": -0.00033725490196080676,
+        "diff_vs_treat_all_ci_low": -0.0008823699936066268,
+        "diff_vs_treat_all_ci_high": 0.00038798795916290395,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "s_learner",
+        "estimator": "IPW",
+        "policy": "budget",
+        "budget_requested": 0.3,
+        "budget": 0.3,
+        "n_treated": 150000,
+        "value": 0.010882352941176537,
+        "se": 0.0007415651047389936,
+        "ci_low": 0.009321117719894648,
+        "ci_high": 0.012238501411105605,
+        "random_value": 0.003299058823529438,
+        "diff_vs_random": 0.0075832941176470995,
+        "diff_vs_random_ci_low": 0.006553849062261814,
+        "diff_vs_random_ci_high": 0.008522273056897817,
+        "treat_all_value": 0.010996862745098127,
+        "diff_vs_treat_all": -0.0001145098039215895,
+        "diff_vs_treat_all_ci_low": -0.0005748295944529539,
+        "diff_vs_treat_all_ci_high": 0.00039078509665349694,
+        "feasibility": "feasible (budget-constrained)"
+      },
+      {
+        "model": "s_learner",
+        "estimator": "IPW",
+        "policy": "uplift_gt_0",
+        "budget_requested": NaN,
+        "budget": 0.98597,
+        "n_treated": 492985,
+        "value": 0.0111019607843138,
+        "se": 0.0007653576614784471,
+        "ci_low": 0.009533506295313654,
+        "ci_high": 0.012482381111659894,
+        "random_value": 0.0108425767607844,
+        "diff_vs_random": 0.0002593840235294003,
+        "diff_vs_random_ci_low": -7.957156968655698e-05,
+        "diff_vs_random_ci_high": 0.0006397145652984254,
+        "treat_all_value": 0.010996862745098127,
+        "diff_vs_treat_all": 0.00010509803921567376,
+        "diff_vs_treat_all_ci_low": -0.00023961847788375113,
+        "diff_vs_treat_all_ci_high": 0.0004843983487069375,
+        "feasibility": "feasible (budget-constrained)"
+      }
+    ]
+  },
+  "qini": {
+    "logistic": [
+      {
+        "model": "logistic",
+        "estimator": "AIPW",
+        "qini": 0.0027923733875395594,
+        "ci_low": 0.002308833070948223,
+        "ci_high": 0.0032706398159250893,
+        "ate_treat_all": 0.008077829106485216,
+        "note": "100-point trapezoid, area between gain curve and random line"
+      },
+      {
+        "model": "s_learner",
+        "estimator": "AIPW",
+        "qini": 0.0033520193574580496,
+        "ci_low": 0.0028712994899883887,
+        "ci_high": 0.003851679430979994,
+        "ate_treat_all": 0.008077829106485206,
+        "note": "100-point trapezoid, area between gain curve and random line"
+      },
+      {
+        "model": "tarnet_cpu",
+        "estimator": "AIPW",
+        "qini": 0.003307341793558881,
+        "ci_low": 0.002825970828464704,
+        "ci_high": 0.003793293256626725,
+        "ate_treat_all": 0.008077829106485225,
+        "note": "100-point trapezoid, area between gain curve and random line"
+      },
+      {
+        "model": "logistic",
+        "estimator": "IPW",
+        "qini": 0.004564898039215684,
+        "ci_low": 0.0039183592956213925,
+        "ci_high": 0.005200433122624367,
+        "ate_treat_all": 0.010996862745098052,
+        "note": "100-point trapezoid, area between gain curve and random line"
+      },
+      {
+        "model": "s_learner",
+        "estimator": "IPW",
+        "qini": 0.0049806705882353185,
+        "ci_low": 0.004408851040174534,
+        "ci_high": 0.005468054601674721,
+        "ate_treat_all": 0.010996862745098127,
+        "note": "100-point trapezoid, area between gain curve and random line"
+      },
+      {
+        "model": "tarnet_cpu",
+        "estimator": "IPW",
+        "qini": 0.004969611764705914,
+        "ci_low": 0.0043595868360652695,
+        "ci_high": 0.00556446210371585,
+        "ate_treat_all": 0.010996862745098122,
+        "note": "100-point trapezoid, area between gain curve and random line"
+      }
+    ],
+    "tarnet_cpu": [
+      {
+        "model": "tarnet_cpu",
+        "estimator": "AIPW",
+        "qini": 0.003307341793558881,
+        "ci_low": 0.002825970828464704,
+        "ci_high": 0.003793293256626725,
+        "ate_treat_all": 0.008077829106485225,
+        "note": "100-point trapezoid, area between gain curve and random line"
+      },
+      {
+        "model": "logistic",
+        "estimator": "AIPW",
+        "qini": 0.0027923733875395594,
+        "ci_low": 0.002308833070948223,
+        "ci_high": 0.0032706398159250893,
+        "ate_treat_all": 0.008077829106485216,
+        "note": "100-point trapezoid, area between gain curve and random line"
+      },
+      {
+        "model": "s_learner",
+        "estimator": "AIPW",
+        "qini": 0.0033520193574580496,
+        "ci_low": 0.0028712994899883887,
+        "ci_high": 0.003851679430979994,
+        "ate_treat_all": 0.008077829106485206,
+        "note": "100-point trapezoid, area between gain curve and random line"
+      },
+      {
+        "model": "tarnet_cpu",
+        "estimator": "IPW",
+        "qini": 0.004969611764705914,
+        "ci_low": 0.0043595868360652695,
+        "ci_high": 0.00556446210371585,
+        "ate_treat_all": 0.010996862745098122,
+        "note": "100-point trapezoid, area between gain curve and random line"
+      },
+      {
+        "model": "logistic",
+        "estimator": "IPW",
+        "qini": 0.004564898039215684,
+        "ci_low": 0.0039183592956213925,
+        "ci_high": 0.005200433122624367,
+        "ate_treat_all": 0.010996862745098052,
+        "note": "100-point trapezoid, area between gain curve and random line"
+      },
+      {
+        "model": "s_learner",
+        "estimator": "IPW",
+        "qini": 0.0049806705882353185,
+        "ci_low": 0.004408851040174534,
+        "ci_high": 0.005468054601674721,
+        "ate_treat_all": 0.010996862745098127,
+        "note": "100-point trapezoid, area between gain curve and random line"
+      }
+    ]
+  },
+  "pairwise": {
+    "logistic": [
+      {
+        "model": "s_learner",
+        "reference_model": "logistic",
+        "estimator": "AIPW",
+        "metric": "value@10%",
+        "diff": 0.0005149576755955074,
+        "ci_low": -3.350933648342264e-05,
+        "ci_high": 0.0010606675497918804
+      },
+      {
+        "model": "s_learner",
+        "reference_model": "logistic",
+        "estimator": "AIPW",
+        "metric": "value@20%",
+        "diff": 0.0008126458187106217,
+        "ci_low": 0.00033347414880870754,
+        "ci_high": 0.0014826740864820798
+      },
+      {
+        "model": "s_learner",
+        "reference_model": "logistic",
+        "estimator": "AIPW",
+        "metric": "value@30%",
+        "diff": 0.0007433802956560848,
+        "ci_low": 0.0002501670658108245,
+        "ci_high": 0.001271017401951933
+      },
+      {
+        "model": "s_learner",
+        "reference_model": "logistic",
+        "estimator": "AIPW",
+        "metric": "qini",
+        "diff": 0.0005596459699184902,
+        "ci_low": 0.00011891133187975464,
+        "ci_high": 0.0009571458280614747
+      },
+      {
+        "model": "tarnet_cpu",
+        "reference_model": "logistic",
+        "estimator": "AIPW",
+        "metric": "value@10%",
+        "diff": 0.000609500343697951,
+        "ci_low": 9.891104101283664e-05,
+        "ci_high": 0.0012071020440481458
+      },
+      {
+        "model": "tarnet_cpu",
+        "reference_model": "logistic",
+        "estimator": "AIPW",
+        "metric": "value@20%",
+        "diff": 0.0008126699186564801,
+        "ci_low": 0.00013787401912244385,
+        "ci_high": 0.0015383008098334354
+      },
+      {
+        "model": "tarnet_cpu",
+        "reference_model": "logistic",
+        "estimator": "AIPW",
+        "metric": "value@30%",
+        "diff": 0.0005659065631481346,
+        "ci_low": -3.4847627920192037e-06,
+        "ci_high": 0.0011139128897195783
+      },
+      {
+        "model": "tarnet_cpu",
+        "reference_model": "logistic",
+        "estimator": "AIPW",
+        "metric": "qini",
+        "diff": 0.0005149684060193217,
+        "ci_low": 7.215626018500136e-05,
+        "ci_high": 0.0010048856727470207
+      },
+      {
+        "model": "s_learner",
+        "reference_model": "logistic",
+        "estimator": "IPW",
+        "metric": "value@10%",
+        "diff": 0.00048470588235299643,
+        "ci_low": -0.00022403584353328812,
+        "ci_high": 0.0012208037987268903
+      },
+      {
+        "model": "s_learner",
+        "reference_model": "logistic",
+        "estimator": "IPW",
+        "metric": "value@20%",
+        "diff": 0.0006313725490196664,
+        "ci_low": -4.7505259127149574e-05,
+        "ci_high": 0.0013883980745721042
+      },
+      {
+        "model": "s_learner",
+        "reference_model": "logistic",
+        "estimator": "IPW",
+        "metric": "value@30%",
+        "diff": 0.000512156862745158,
+        "ci_low": -0.00014874579406813933,
+        "ci_high": 0.0011048991353072176
+      },
+      {
+        "model": "s_learner",
+        "reference_model": "logistic",
+        "estimator": "IPW",
+        "metric": "qini",
+        "diff": 0.00041577254901963446,
+        "ci_low": -0.00015277853131123506,
+        "ci_high": 0.0009367986848556939
+      },
+      {
+        "model": "tarnet_cpu",
+        "reference_model": "logistic",
+        "estimator": "IPW",
+        "metric": "value@10%",
+        "diff": 0.0005145098039216409,
+        "ci_low": -0.00031176238350750943,
+        "ci_high": 0.0012990060635246804
+      },
+      {
+        "model": "tarnet_cpu",
+        "reference_model": "logistic",
+        "estimator": "IPW",
+        "metric": "value@20%",
+        "diff": 0.0007513725490196771,
+        "ci_low": -2.9042036667842374e-05,
+        "ci_high": 0.0016424466876210771
+      },
+      {
+        "model": "tarnet_cpu",
+        "reference_model": "logistic",
+        "estimator": "IPW",
+        "metric": "value@30%",
+        "diff": 0.00037411764705889625,
+        "ci_low": -0.0004332967612967285,
+        "ci_high": 0.0010697370852040939
+      },
+      {
+        "model": "tarnet_cpu",
+        "reference_model": "logistic",
+        "estimator": "IPW",
+        "metric": "qini",
+        "diff": 0.00040471372549022964,
+        "ci_low": -0.00024984633119408894,
+        "ci_high": 0.001049381850540136
+      }
+    ],
+    "tarnet_cpu": [
+      {
+        "model": "logistic",
+        "reference_model": "tarnet_cpu",
+        "estimator": "AIPW",
+        "metric": "value@10%",
+        "diff": -0.000609500343697951,
+        "ci_low": -0.0012071020440481458,
+        "ci_high": -9.891104101283618e-05
+      },
+      {
+        "model": "logistic",
+        "reference_model": "tarnet_cpu",
+        "estimator": "AIPW",
+        "metric": "value@20%",
+        "diff": -0.0008126699186564801,
+        "ci_low": -0.0015383008098334354,
+        "ci_high": -0.0001378740191224437
+      },
+      {
+        "model": "logistic",
+        "reference_model": "tarnet_cpu",
+        "estimator": "AIPW",
+        "metric": "value@30%",
+        "diff": -0.0005659065631481346,
+        "ci_low": -0.001113912889719578,
+        "ci_high": 3.484762792019333e-06
+      },
+      {
+        "model": "logistic",
+        "reference_model": "tarnet_cpu",
+        "estimator": "AIPW",
+        "metric": "qini",
+        "diff": -0.0005149684060193217,
+        "ci_low": -0.0010048856727470203,
+        "ci_high": -7.215626018500111e-05
+      },
+      {
+        "model": "s_learner",
+        "reference_model": "tarnet_cpu",
+        "estimator": "AIPW",
+        "metric": "value@10%",
+        "diff": -9.454266810244357e-05,
+        "ci_low": -0.0007373040773428009,
+        "ci_high": 0.0005099363906666288
+      },
+      {
+        "model": "s_learner",
+        "reference_model": "tarnet_cpu",
+        "estimator": "AIPW",
+        "metric": "value@20%",
+        "diff": -2.409994585839126e-08,
+        "ci_low": -0.0004729120464091747,
+        "ci_high": 0.0004367499319166389
+      },
+      {
+        "model": "s_learner",
+        "reference_model": "tarnet_cpu",
+        "estimator": "AIPW",
+        "metric": "value@30%",
+        "diff": 0.00017747373250795017,
+        "ci_low": -0.0001962013496074538,
+        "ci_high": 0.0006765639635293995
+      },
+      {
+        "model": "s_learner",
+        "reference_model": "tarnet_cpu",
+        "estimator": "AIPW",
+        "metric": "qini",
+        "diff": 4.467756389916859e-05,
+        "ci_low": -0.00028524525930769174,
+        "ci_high": 0.00038267579195235067
+      },
+      {
+        "model": "logistic",
+        "reference_model": "tarnet_cpu",
+        "estimator": "IPW",
+        "metric": "value@10%",
+        "diff": -0.0005145098039216409,
+        "ci_low": -0.0012990060635246804,
+        "ci_high": 0.0003117623835075097
+      },
+      {
+        "model": "logistic",
+        "reference_model": "tarnet_cpu",
+        "estimator": "IPW",
+        "metric": "value@20%",
+        "diff": -0.0007513725490196771,
+        "ci_low": -0.001642446687621077,
+        "ci_high": 2.904203666784238e-05
+      },
+      {
+        "model": "logistic",
+        "reference_model": "tarnet_cpu",
+        "estimator": "IPW",
+        "metric": "value@30%",
+        "diff": -0.00037411764705889625,
+        "ci_low": -0.0010697370852040936,
+        "ci_high": 0.0004332967612967286
+      },
+      {
+        "model": "logistic",
+        "reference_model": "tarnet_cpu",
+        "estimator": "IPW",
+        "metric": "qini",
+        "diff": -0.00040471372549022964,
+        "ci_low": -0.0010493818505401358,
+        "ci_high": 0.000249846331194089
+      },
+      {
+        "model": "s_learner",
+        "reference_model": "tarnet_cpu",
+        "estimator": "IPW",
+        "metric": "value@10%",
+        "diff": -2.9803921568644434e-05,
+        "ci_low": -0.0007686358277997345,
+        "ci_high": 0.0007983975737121872
+      },
+      {
+        "model": "s_learner",
+        "reference_model": "tarnet_cpu",
+        "estimator": "IPW",
+        "metric": "value@20%",
+        "diff": -0.00012000000000001072,
+        "ci_low": -0.0007224762886800261,
+        "ci_high": 0.0004943107002862977
+      },
+      {
+        "model": "s_learner",
+        "reference_model": "tarnet_cpu",
+        "estimator": "IPW",
+        "metric": "value@30%",
+        "diff": 0.00013803921568626178,
+        "ci_low": -0.00033890347838243283,
+        "ci_high": 0.0007462837036184304
+      },
+      {
+        "model": "s_learner",
+        "reference_model": "tarnet_cpu",
+        "estimator": "IPW",
+        "metric": "qini",
+        "diff": 1.1058823529404814e-05,
+        "ci_low": -0.0004032155888066393,
+        "ci_high": 0.0004492593055054287
+      }
+    ]
+  }
+}
