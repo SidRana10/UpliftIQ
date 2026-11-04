@@ -1,0 +1,95 @@
+{
+  "model_name": "criteo_s_learner",
+  "model_version": "1.0.0",
+  "created_at": "2026-11-04T07:28:25+00:00",
+  "status": "approved: frozen C6 selection, evaluated once in C7",
+  "algorithm": "LightGBM S-learner (one classifier on [f0..f11, treatment]); uplift = P(visit|x,1) - P(visit|x,0)",
+  "input_schema": {
+    "features": [
+      "f0",
+      "f1",
+      "f2",
+      "f3",
+      "f4",
+      "f5",
+      "f6",
+      "f7",
+      "f8",
+      "f9",
+      "f10",
+      "f11"
+    ],
+    "dtype": "float32",
+    "constraints": "all 12 required, finite, numeric; extra fields rejected",
+    "preprocessing": "none (raw anonymized floats; tree model is scale-invariant)",
+    "treatment_indicator": "added internally (0 then 1); never supplied by callers",
+    "max_batch": 200000
+  },
+  "outputs": {
+    "p_visit_control": "P(visit | x, no treatment)",
+    "p_visit_treatment": "P(visit | x, treatment)",
+    "uplift": "p_visit_treatment - p_visit_control",
+    "recommend_treatment": "uplift > 0 (default policy; budgeted ranking is an evaluation concept)"
+  },
+  "artifact": {
+    "file": "model.txt",
+    "sha256": "1e5059cbf4ed40816157c9f6611dbf43348ffba7700885cb70b355fd65dcf980",
+    "format": "LightGBM text model"
+  },
+  "frozen": {
+    "config_file": "reports/criteo/benchmark_full/frozen_config.json",
+    "config_sha256": "e28582810b3c81d0f41d6115a5f17a857dc58927edfc729fb57921df98c0a2bb",
+    "hyperparameters": {
+      "seed": 42,
+      "early_stopping_rounds": 30,
+      "val_fraction": 0.15,
+      "lightgbm": {
+        "n_estimators": 400,
+        "learning_rate": 0.05,
+        "num_leaves": 31,
+        "min_child_samples": 500,
+        "subsample": 0.8,
+        "subsample_freq": 1,
+        "colsample_bytree": 0.8,
+        "random_state": 42,
+        "deterministic": true,
+        "force_row_wise": true,
+        "n_jobs": 4,
+        "verbose": -1
+      }
+    },
+    "seed": 42,
+    "training_rows": 8946939,
+    "dataset_sha256": "2716e1bf0fd157a93b5bf86924d9088419dfbac2022c6cd90030220634f616dc",
+    "dataset_version": "Criteo Uplift Prediction Dataset v2.1",
+    "split_fingerprint": "c6bcbcbf543b4f738b88e03107377f10b63848b1ba58e401f80622e6f50f3be3",
+    "validation_uplift_sha256": "fcc92a00cbb917f01d05b42acf98b2ee7556d9a2a48ee20bf466e61ca8d206be"
+  },
+  "reproducibility": {
+    "packaged_model_validation_uplift_sha256": "fcc92a00cbb917f01d05b42acf98b2ee7556d9a2a48ee20bf466e61ca8d206be",
+    "matches_frozen_validation_fingerprint": true,
+    "held_out_test_set_read": false
+  },
+  "source": {
+    "source": "local C7 evaluation artifact",
+    "source_file": "visit.pkl",
+    "source_artifact_sha256": "3058f368d6eede8aa3ca67750e1ce3050755d6cb49172efc479dd7e84159b882"
+  },
+  "dependencies": {
+    "python": "3.12.14",
+    "lightgbm": "4.7.0",
+    "numpy": "2.5.4",
+    "pandas": "3.1.0"
+  },
+  "evaluation_reports": {
+    "validation": "reports/criteo/benchmark_full/final_report.md",
+    "held_out": "reports/criteo/final/final_report.md",
+    "evaluation_record": "reports/criteo/final/evaluation_record.json"
+  },
+  "limitations": [
+    "Trained on the anonymized Criteo benchmark: features are not business-interpretable.",
+    "Conditional estimates for the released sample; not population ROI or guaranteed causal gains.",
+    "The constant 0.85 propensity is unverifiable and IPW/AIPW disagree on this file (AIPW primary).",
+    "The model's uplift is a ranking signal; its calibration as an absolute effect was not validated."
+  ]
+}

@@ -17,6 +17,7 @@ dependencies = [
     "scikit-learn>=1.4",
     "lightgbm>=4.6",
     "torch>=2.4",
+    "mlflow>=3.0",
 ]
 
 [project.optional-dependencies]
@@ -59,3 +60,5 @@ select = ["E", "F", "I", "UP", "B"]
 "src/upliftiq/evaluation/criteo_ipw_diagnostic.py" = ["E501"]
 "src/upliftiq/evaluation/criteo_final.py" = ["E501"]
 "src/upliftiq/evaluation/criteo_heldout.py" = ["E501"]
+"src/upliftiq/modeling/criteo_package.py" = ["E501"]
+"src/upliftiq/modeling/criteo_tracking.py" = ["E501"]
