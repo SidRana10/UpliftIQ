@@ -315,3 +315,50 @@ def test_cors_origins_are_configurable_by_environment(monkeypatch, pkg):
     with TestClient(create_app(Settings(model_dir=pkg))) as c:
         r = c.get(V1 + "/health", headers={"Origin": "https://demo.example.com"})
         assert r.headers["access-control-allow-origin"] == "https://demo.example.com"
+
+
+# ------------------------------------------------- numeric pass-through (parity with source JSON)
+
+
+def _nan_to_none(x):
+    """The API serializes NaN as JSON null (browsers cannot parse NaN)."""
+    if isinstance(x, float) and x != x:
+        return None
+    if isinstance(x, dict):
+        return {k: _nan_to_none(v) for k, v in x.items()}
+    if isinstance(x, list):
+        return [_nan_to_none(v) for v in x]
+    return x
+
+
+def _source(path):
+    return _nan_to_none(json.loads((Settings().reports / path).read_text()))
+
+
+def test_heldout_numeric_matches_final_results_exactly_and_keeps_display_fields(client):
+    final = _source("criteo/final/final_results.json")
+    for path in ("/criteo/heldout", "/criteo/curves"):
+        d = client.get(V1 + path).json()["data"]
+        assert d["numeric"] == {k: final[k] for k in ("policies", "references", "qini")}
+    held = client.get(V1 + "/criteo/heldout").json()["data"]
+    assert held["value"] == final["tables"]["value"]  # existing display rows preserved
+    assert held["numeric"]["policies"][0]["ci_low"] < held["numeric"]["policies"][0]["value"]
+    assert len(client.get(V1 + "/criteo/curves").json()["data"]["points"]) == 3
+
+
+def test_benchmark_numeric_matches_source_and_keeps_existing_fields(client):
+    full = _source("criteo/benchmark_full/final_results.json")
+    scaling = _source("criteo/benchmark_2m/scaling_results.json")
+    d = client.get(V1 + "/criteo/benchmark").json()["data"]
+    n = d["numeric"]
+    assert n["policies"] == next(iter(full["policies"].values()))
+    assert n["qini"] == next(iter(full["qini"].values()))
+    assert n["pairwise"] == full["pairwise"]
+    assert set(n["models"]) == {"logistic", "s_learner", "tarnet_cpu"}
+    for name, m in n["models"].items():
+        assert m["fit_seconds"] == full["manifests"][name]["fit_seconds"]
+        assert m["latency"] == full["manifests"][name]["latency"]
+    assert d["learning_curve"]["engineering"] == scaling["engineering"]
+    assert d["learning_curve"]["levels"] == scaling["levels"]
+    assert d["tables"]["value"] == full["tables"]["value"]  # display tables unchanged
+    assert d["selection"]["chosen"] == "s_learner"

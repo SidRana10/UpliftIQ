@@ -1,0 +1,122 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Design tokens (docs/frontend_implementation_plan.md §A1). Colour encodes the kind of evidence,
+   not the dataset: teal = held-out/selected, violet = validation, amber = caveat/exploratory,
+   slate = baseline/reference. */
+@theme {
+  --color-bg: #f5f7fa;
+  --color-surface: #ffffff;
+  --color-subtle: #eef1f5;
+  --color-border: #e2e7ee;
+  --color-border-strong: #cbd3dd;
+
+  --color-fg: #0f1726;
+  --color-fg-secondary: #4a5568;
+  --color-fg-muted: #6b7686;
+
+  --color-sidebar: #121b2c;
+  --color-sidebar-elevated: #1a2538;
+  --color-sidebar-border: #26324a;
+  --color-sidebar-fg: #c5cedb;
+  --color-sidebar-muted: #8391a8;
+
+  --color-teal: #117e74;
+  --color-teal-ink: #0b5f57;
+  --color-teal-soft: #e3f2f0;
+  --color-violet: #7467c9;
+  --color-violet-ink: #5e51b5;
+  --color-violet-soft: #eceaf8;
+  --color-amber: #d99a43;
+  --color-amber-ink: #8f5d17;
+  --color-amber-soft: #fbf1e2;
+  --color-danger: #c2413b;
+  --color-danger-soft: #fbeae9;
+  --color-ref: #64748b;
+  --color-ref-soft: #94a3b8;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+
+  --radius-panel: 10px;
+  --radius-control: 8px;
+  --radius-chip: 6px;
+
+  --shadow-panel: 0 1px 2px rgb(16 24 40 / 0.04);
+  --shadow-popover: 0 8px 24px rgb(16 24 40 / 0.12);
+
+  --animate-fade-in: fade-in 0.18s ease-out;
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(2px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 20px;
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-teal);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  /* focus ring that reads on the dark sidebar */
+  .on-dark :focus-visible {
+    outline-color: #6fd0c6;
+  }
+  ::selection {
+    background: var(--color-teal-soft);
+  }
+}
+
+@layer utilities {
+  .eyebrow {
+    font-size: 11px;
+    line-height: 16px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-fg-muted);
+  }
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border-strong) transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Recharts: keep tooltips and focus outlines tidy */
+.recharts-wrapper:focus-visible,
+.recharts-surface:focus-visible {
+  outline: none;
+}
+.recharts-wrapper {
+  font-family: var(--font-sans);
+}

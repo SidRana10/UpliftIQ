@@ -50,6 +50,18 @@ CRITEO_FIGURES = {
 }
 
 
+MODEL_FIELDS = (
+    "family", "config_key", "n_fit", "fit_seconds", "predict_val_seconds", "latency",
+    "rss_gb_before_fit", "rss_gb_peak_during_fit", "peak_rss_gb", "omp_num_threads",
+    "hyperparameters", "training", "libraries", "code", "uplift_mean", "uplift_std",
+)  # fmt: skip
+
+
+def _heldout_numeric(final: dict) -> dict:
+    """Unrounded policy values, intervals and Qini as stored (the display tables are strings)."""
+    return {k: final[k] for k in ("policies", "references", "qini")}
+
+
 def _reports(request: Request) -> Reports:
     return request.app.state.reports
 
@@ -287,7 +299,21 @@ def criteo_benchmark(request: Request):
         },
         "selection": full["selection"],
         "change_from_2m": full["changes_vs_base"],
-        "learning_curve": {"levels": scaling["levels"], "changes": scaling["changes"]},
+        "learning_curve": {
+            "levels": scaling["levels"],
+            "changes": scaling["changes"],
+            "engineering": scaling["engineering"],
+        },
+        "numeric": {
+            # every model is scored identically under each reference run: any one is the full set
+            "policies": next(iter(full["policies"].values())),
+            "qini": next(iter(full["qini"].values())),
+            "pairwise": full["pairwise"],
+            "models": {
+                name: {k: m[k] for k in MODEL_FIELDS if k in m}
+                for name, m in full["manifests"].items()
+            },
+        },
     }
     return envelope(r, "criteo", srcs, data, CRITEO_FROZEN)
 
@@ -314,6 +340,7 @@ def criteo_heldout(request: Request):
             "note": "exploratory only; never used for any decision",
         },
         "evaluation_record": r.json(srcs[1]),
+        "numeric": _heldout_numeric(final),
     }
     return envelope(r, "criteo", srcs, data, CRITEO_FROZEN)
 
@@ -333,6 +360,7 @@ def criteo_curves(request: Request):
         "references": final["tables"]["references"],
         "qini": final["tables"]["qini"],
         "figures": {n: f"/api/v1/criteo/figures/{n}" for n in CRITEO_FIGURES},
+        "numeric": _heldout_numeric(final),
     }
     return envelope(r, "criteo", srcs, data, CRITEO_FROZEN)
 
