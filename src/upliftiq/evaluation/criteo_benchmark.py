@@ -641,7 +641,7 @@ def _figures(bundle: dict, tables: dict, path_prefix: Path) -> None:
     plt.close(fig)
 
 
-def build_report(bundle: dict, tables: dict, size: int, prefix: str) -> str:
+def build_report(bundle: dict, tables: dict, size: int, prefix: str, stage: str = "C5") -> str:
     m0 = next(iter(bundle["manifests"].values()))
     prov = m0["provenance"]
     libs = {}
@@ -666,7 +666,7 @@ def build_report(bundle: dict, tables: dict, size: int, prefix: str) -> str:
         ac_text = "IPW and AIPW agree within noise and the arms are balanced in predicted baseline."
     pair_view = tables["pairwise"]
     key_pairs = pair_view[pair_view.metric.isin(["qini", "value@20%"])]
-    return f"""# Criteo C5 preliminary validation benchmark: {size:,} training rows
+    return f"""# Criteo {stage} preliminary validation benchmark: {size:,} training rows
 
 **Preliminary.** These are validation-subset benchmarks on training subsets of {size:,} rows. They are
 not final held-out results: the Criteo test set was not touched, and **no model has been selected or
@@ -711,7 +711,7 @@ Latency measured on the validation rows with `predict_uplift` (includes preproce
 for tree/linear models; TARNet on its own device. Peak RSS is the process high-water mark, including
 data loading (the memory-mapped feature file is paged in while gathering rows). "RSS peak in fit"
 is sampled every 50 ms during `fit`; MPS unified memory is not fully visible in RSS. TARNet
-epochs: 30 is the epoch cap (early stopping did not trigger).
+`epochs` is the number of epochs run (cap 30, early-stopping patience 3 on a 10% internal split).
 
 {md(tables["engineering"].round({"train_s": 1, "predict 500k rows (s)": 2, "RSS before fit (GB)": 2, "RSS peak in fit (GB)": 2, "process peak RSS (GB)": 2}))}
 
@@ -737,16 +737,17 @@ No propensity model was fitted; this only compares the two estimators and arm ba
 ## Caveats
 - A single preliminary rung and a single seed; model orderings may change with more training data, tuning, or other seeds.
 - TARNet appears on CPU and MPS: CPU is bit-reproducible, MPS is not guaranteed to be. Selection (later) will use one device.
-- The shared nuisance is itself a LightGBM T-learner; AIPW remains unbiased for any out-of-sample nuisance, and IPW is shown as a check.
+- The shared nuisance is itself a LightGBM T-learner. With an out-of-sample nuisance, AIPW is unbiased if the constant 0.85 propensity holds and is consistent if the nuisance is adequate; it is not guaranteed to be unbiased if both are wrong. IPW is shown as a check only.
+- Using one shared estimator makes models comparable but does not by itself make their relative rankings unbiased.
 """
 
 
-def write_outputs(bundle: dict, size: int, out_dir: Path) -> Path:
+def write_outputs(bundle: dict, size: int, out_dir: Path, stage: str = "C5") -> Path:
     out_dir.mkdir(parents=True, exist_ok=True)
     prefix = f"fit{size}"
     tables = build_tables(bundle)
     _figures(bundle, tables, out_dir / prefix)
-    (out_dir / f"{prefix}_report.md").write_text(build_report(bundle, tables, size, prefix))
+    (out_dir / f"{prefix}_report.md").write_text(build_report(bundle, tables, size, prefix, stage))
     first = next(iter(bundle["results"].values()))
     summary = {
         "status": "preliminary validation benchmark; test set untouched; no model selected",
@@ -785,6 +786,7 @@ def run_ladder(
     nuisance_rows=NUISANCE_ROWS,
     nuisance_exclude=NUISANCE_EXCLUDE,
     specs=None,
+    stage="C5",
 ) -> list[Path]:
     specs = specs or MODEL_SPECS
     data_dir = Path(data_dir)
@@ -805,7 +807,7 @@ def run_ladder(
                 force,
             )
         bundle = evaluate_rung(data_dir, split, size, n_val, list(names), nuisance, seed, n_boot)
-        reports.append(write_outputs(bundle, size, out_dir))
+        reports.append(write_outputs(bundle, size, out_dir, stage))
     return reports
 
 
@@ -823,6 +825,7 @@ def main(argv: list[str] | None = None) -> int:
     run.add_argument("--seed", type=int, default=SEED)
     run.add_argument("--n-boot", type=int, default=N_BOOT)
     run.add_argument("--force", action="store_true")
+    run.add_argument("--stage", default="C5", help="label used in report titles")
     w = sub.add_parser("model")
     for a in ("--data-dir", "--name", "--spec", "--out-dir", "--config-key"):
         w.add_argument(a, required=True)
@@ -848,6 +851,7 @@ def main(argv: list[str] | None = None) -> int:
             args.seed,
             args.n_boot,
             args.force,
+            stage=args.stage,
         ):
             print("wrote", path)
     return 0

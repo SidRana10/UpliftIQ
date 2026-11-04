@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 import json
+import os
 import shutil
 import subprocess
 import sys
+from pathlib import Path
 
 import numpy as np
 import pytest
@@ -17,6 +19,7 @@ from upliftiq.data.criteo_prepare import (
     train_subset,
 )
 from upliftiq.evaluation import criteo_benchmark as cb
+from upliftiq.evaluation import criteo_scaling as cs
 
 N = 60_000
 N_FIT, N_VAL, N_NUIS, N_EXCL = 8_000, 6_000, 10_000, 12_000
@@ -169,7 +172,9 @@ def test_driver_process_does_not_load_lightgbm_or_torch():
         "import sys, upliftiq.evaluation.criteo_benchmark as cb;"
         "assert 'torch' not in sys.modules and 'lightgbm' not in sys.modules"
     )
-    subprocess.run([sys.executable, "-c", code], check=True, capture_output=True)
+    src = str(Path(cb.__file__).resolve().parents[2])
+    env = {**os.environ, "PYTHONPATH": src}  # independent of how the package is installed
+    subprocess.run([sys.executable, "-c", code], check=True, capture_output=True, env=env)
 
 
 def test_helpers_latency_subsets_and_config_key():
@@ -211,3 +216,45 @@ def test_failed_worker_surfaces_its_error():
                 "k",
             ]
         )
+
+
+def test_learning_curve_pairs_sizes_and_stage_label_is_configurable(tmp_path):
+    data = make_dataset(tmp_path / "data")
+    sizes = (3_000, 6_000, 9_000)
+    cb.run_ladder(
+        list(sizes),
+        ["logistic"],
+        data,
+        tmp_path / "rungs",
+        n_val=N_VAL,
+        n_boot=40,
+        nuisance_rows=N_NUIS,
+        nuisance_exclude=N_EXCL,
+        specs={"logistic": SPECS["logistic"]},
+        stage="C6",
+    )
+    assert (tmp_path / "rungs/fit9000_report.md").read_text().startswith("# Criteo C6 ")
+    report = cs.run(
+        ["logistic"],
+        data,
+        tmp_path / "scaling",
+        n_val=N_VAL,
+        n_boot=40,
+        sizes=sizes,
+        nuisance_rows=N_NUIS,
+    )
+    text = report.read_text()
+    assert "validation-only" in text
+    flat = " ".join(text.split())
+    assert "no model has been selected" in flat and "ROI" in flat
+    res = json.loads((report.parent / "scaling_results.json").read_text())
+    assert {r["size"] for r in res["levels"]} == set(sizes)
+    steps = {c["step"] for c in res["changes"]}
+    assert steps == {"3K to 6K", "6K to 9K"}
+    for c in res["changes"]:
+        assert c["ci_low"] <= c["diff"] <= c["ci_high"]
+    # a change is the later rung minus the earlier one, from the same per-size AIPW levels
+    lv = {r["size"]: r for r in res["levels"]}
+    q = next(c for c in res["changes"] if c["step"] == "6K to 9K" and c["metric"] == "qini")
+    assert q["diff"] == pytest.approx(lv[9_000]["qini"][0] - lv[6_000]["qini"][0], abs=1e-9)
+    assert (report.parent / "scaling_curves.png").exists()
