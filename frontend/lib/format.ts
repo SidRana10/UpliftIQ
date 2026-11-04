@@ -30,6 +30,8 @@ export const hillstrom = {
   /** dollars per customer */
   spend: (x: number, dp = 2) => `${x < 0 ? MINUS : ""}$${Math.abs(x).toFixed(dp)}`,
   spendDelta: (x: number, dp = 2) => `${sign(x, dp)}$${Math.abs(x).toFixed(dp)}`,
+  /** relative change (0.72 = +72%), signed percent */
+  relDelta: (x: number, dp = 0) => `${sign(x * 100, dp)}${Math.abs(x * 100).toFixed(dp)}%`,
 };
 
 // ------------------------------------------------------------------ Criteo (percentage points)
@@ -41,7 +43,11 @@ export const criteo = {
   pp: (x: number, dp = 3) => `${fixed(x * 100, dp)} pp`,
   /** same, without the unit (for use inside an interval) */
   ppValue: (x: number, dp = 3) => fixed(x * 100, dp),
+  /** signed, without the unit (for use inside an interval) */
+  ppDeltaValue: (x: number, dp = 3) => `${sign(x * 100, dp)}${Math.abs(x * 100).toFixed(dp)}`,
   ppDelta: (x: number, dp = 3) => `${sign(x * 100, dp)}${Math.abs(x * 100).toFixed(dp)} pp`,
+  /** standardized mean difference / KS statistic, signed, 3 dp */
+  smd: (x: number, dp = 3) => fixed(x, dp),
   /** predicted probability -> percent */
   prob: (x: number, dp = 2) => `${fixed(x * 100, dp)}%`,
 };
@@ -86,6 +92,15 @@ export function seconds(x: number): string {
 
 export function gigabytes(x: number): string {
   return `${x.toFixed(2)} GB`;
+}
+
+/** training-set size: 100000 -> "100K", 2000000 -> "2M", 8946939 -> "8.9M" */
+export function sizeLabel(n: number): string {
+  if (n >= 1e6) {
+    const m = n / 1e6;
+    return `${Number.isInteger(m) ? m : m.toFixed(1)}M`;
+  }
+  return `${Math.round(n / 1e3)}K`;
 }
 
 export function budget(x: number): string {

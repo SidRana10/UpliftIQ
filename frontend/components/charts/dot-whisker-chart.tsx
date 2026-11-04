@@ -132,6 +132,7 @@ function RowTick({
 export function DotWhiskerChart({
   rows,
   domain,
+  ticks,
   tickFormat,
   axisTitle,
   refLines = [],
@@ -139,6 +140,7 @@ export function DotWhiskerChart({
 }: {
   rows: DotRow[];
   domain?: [number, number];
+  ticks?: number[];
   tickFormat: (v: number) => string;
   axisTitle: string;
   refLines?: { x: number; label: string; color?: string }[];
@@ -150,17 +152,18 @@ export function DotWhiskerChart({
   const hi = Math.max(...rows.map((r) => r.high));
   const pad = (hi - lo) * 0.14 || 1;
   const dom: [number, number] = domain ?? [Math.max(0, lo - pad), hi + pad];
-  const height = rows.length * rowHeight + 56;
+  const height = rows.length * rowHeight + 70;
 
   return (
     <div role="img" aria-label={`${axisTitle}: ${rows.map((r) => `${r.label} ${r.valueLabel} ${r.rangeLabel}`).join("; ")}`}>
       <ResponsiveContainer width="100%" height={height}>
-        <ScatterChart margin={{ top: 8, right: 24, bottom: 4, left: 0 }}>
+        <ScatterChart margin={{ top: 22, right: 24, bottom: 4, left: 0 }}>
           <CartesianGrid horizontal={false} stroke={COLORS.grid} />
           <XAxis
             type="number"
             dataKey="x"
             domain={dom}
+            ticks={ticks}
             tickFormatter={tickFormat}
             tick={CHART.axisTick}
             axisLine={CHART.axisLine}
@@ -187,7 +190,7 @@ export function DotWhiskerChart({
               x={l.x}
               stroke={l.color ?? COLORS.refSoft}
               strokeDasharray="4 3"
-              label={{ value: l.label, position: "insideTopRight", fontSize: 11, fill: COLORS.axis }}
+              label={{ value: l.label, position: "top", fontSize: 11, fill: COLORS.axis }}
             />
           ))}
           <Tooltip
@@ -217,7 +220,7 @@ export function DotWhiskerChart({
               isAnimationActive={animate}
               animationDuration={300}
             >
-              <ErrorBar dataKey="err" direction="x" width={10} stroke={row.color} strokeWidth={row.emphasis ? 2.25 : 1.75} />
+              <ErrorBar isAnimationActive={animate} dataKey="err" direction="x" width={10} stroke={row.color} strokeWidth={row.emphasis ? 2.25 : 1.75} />
             </Scatter>
           ))}
         </ScatterChart>

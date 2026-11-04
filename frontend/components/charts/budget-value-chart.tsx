@@ -180,10 +180,10 @@ export function BudgetValueChart({
             }}
           />
           <Scatter data={data("random")} shape={(p: ShapeProps) => <Marker {...p} />} isAnimationActive={animate} animationDuration={300}>
-            <ErrorBar dataKey="err" direction="y" width={9} stroke={COLORS.ref} strokeWidth={1.5} />
+            <ErrorBar isAnimationActive={animate} dataKey="err" direction="y" width={9} stroke={COLORS.ref} strokeWidth={1.5} />
           </Scatter>
           <Scatter data={data("model")} shape={(p: ShapeProps) => <Marker {...p} />} isAnimationActive={animate} animationDuration={300}>
-            <ErrorBar dataKey="err" direction="y" width={9} stroke={COLORS.teal} strokeWidth={2} />
+            <ErrorBar isAnimationActive={animate} dataKey="err" direction="y" width={9} stroke={COLORS.teal} strokeWidth={2} />
           </Scatter>
         </ScatterChart>
       </ResponsiveContainer>

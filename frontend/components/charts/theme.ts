@@ -39,3 +39,16 @@ export function useIsNarrow(): boolean {
     () => false,
   );
 }
+
+/** Round an axis outward to a 1/2/5 step so ticks land on readable numbers. */
+export function niceAxis(lo: number, hi: number, target = 5): { domain: [number, number]; ticks: number[] } {
+  const span = hi - lo || 1;
+  const raw = span / target;
+  const mag = 10 ** Math.floor(Math.log10(raw));
+  const step = [1, 2, 5, 10].map((m) => m * mag).find((s) => s >= raw) ?? raw;
+  const start = Math.floor(lo / step) * step;
+  const end = Math.ceil(hi / step) * step;
+  const ticks: number[] = [];
+  for (let v = start; v <= end + step / 2; v += step) ticks.push(Number(v.toFixed(10)));
+  return { domain: [start, end], ticks };
+}

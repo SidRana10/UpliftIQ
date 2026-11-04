@@ -23,7 +23,7 @@ const OPTIONS = (["hillstrom", "criteo"] as DatasetId[]).map((d) => ({
 }));
 
 function DatasetSwitch({ allowed, fallback }: { allowed: DatasetId[]; fallback: DatasetId }) {
-  const [dataset, setDataset] = useQueryState<DatasetId>("dataset", fallback, allowed);
+  const [dataset, setDataset] = useQueryState<DatasetId>("dataset", fallback, allowed, true);
   return (
     <SegmentedControl<DatasetId>
       label="Dataset"

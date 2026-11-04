@@ -42,3 +42,6 @@ next-env.d.ts
 
 # keep the committed template
 !.env.example
+
+# local visual-review captures
+/screenshots/

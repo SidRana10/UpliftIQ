@@ -46,6 +46,8 @@ export function ChartFrame({
   title,
   subtitle,
   badge,
+  toolbar,
+  compact = false,
   legend,
   chart,
   table,
@@ -56,6 +58,10 @@ export function ChartFrame({
   title: string;
   subtitle: React.ReactNode;
   badge?: React.ReactNode;
+  /** selector rendered above the chart (keeps the header free for the title) */
+  toolbar?: React.ReactNode;
+  /** icon-only table toggle and no badge: for narrow, side-by-side panels */
+  compact?: boolean;
   legend?: LegendItem[];
   chart: React.ReactNode;
   table: React.ReactNode;
@@ -72,7 +78,7 @@ export function ChartFrame({
         subtitle={subtitle}
         actions={
           <>
-            {badge}
+            {compact ? null : badge}
             <Button
               variant="ghost"
               size="sm"
@@ -82,13 +88,14 @@ export function ChartFrame({
               className="-mr-1 h-7 px-2 text-xs"
             >
               {asTable ? <ChartColumn /> : <Table2 />}
-              <span className="hidden sm:inline">{asTable ? "View chart" : "View as table"}</span>
-              <span className="sr-only sm:hidden">{asTable ? "View chart" : "View as table"}</span>
+              <span className={compact ? "sr-only" : "hidden sm:inline"}>{asTable ? "View chart" : "View as table"}</span>
+              {compact ? null : <span className="sr-only sm:hidden">{asTable ? "View chart" : "View as table"}</span>}
             </Button>
           </>
         }
       />
       <PanelBody className="pt-2">
+        {toolbar ? <div className="mb-3">{toolbar}</div> : null}
         {legend && !asTable ? (
           <div className="mb-2 flex flex-wrap gap-x-4 gap-y-1">
             {legend.map((l) => (
